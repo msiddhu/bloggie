@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "881500609815",
+    "project_id": "bloggie2001",
+    "storage_bucket": "bloggie2001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881500609815:android:7627b4adc2b1789af5ab52",
+        "android_client_info": {
+          "package_name": "com.bloggie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881500609815-s0i31nopbefegq6ugr72v6oi7n1bnpd3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bloggie",
+            "certificate_hash": "1012fc96be86a9c8825cee117fa6e081b32349fc"
+          }
+        },
+        {
+          "client_id": "881500609815-7mi9vnlrc6uac56it1a8pdnkfli11n32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM5PhXjQaP6kl5scLxNvhTobAhCiSZPmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881500609815-7mi9vnlrc6uac56it1a8pdnkfli11n32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
