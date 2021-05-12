@@ -57,7 +57,8 @@ class _SavedBlogsState extends State<SavedBlogs> with AutomaticKeepAliveClientMi
             time: mpdata["time"],
             documentId: mpdata["documentId"],
             issaved: (cUser.saved_blogs).contains(mpdata["documentId"]),
-            likecount: mpdata["likes_count"],
+           // likecount: mpdata["likes_count"],
+            likecount: 0,
             isliked: islike,
           );
 

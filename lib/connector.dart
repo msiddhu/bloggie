@@ -2,6 +2,7 @@ import 'package:bloggie/services/auth.dart';
 import 'package:bloggie/views/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:bloggie/services/static_components.dart';
 
 class connector extends StatefulWidget {
   const connector({Key key}) : super(key: key);
@@ -17,7 +18,8 @@ class _connectorState extends State<connector> {
   void initState(){
     // TODO: implement initState
 
-    super.initState();
+    if(!cUser.ready)
+    {
     asyncMethod().then((flag) => {
       setState(() {
     print("after initialization");
@@ -25,14 +27,23 @@ class _connectorState extends State<connector> {
     })
     }
     );
+    }
+    initialized=true;
+    super.initState();
   }
 
   Future<bool> asyncMethod() async{
-   return await AuthService.init();
+    bool gh=await AuthService.init();
+   return  gh;
   }
+
+
+
   @override
   Widget build(BuildContext context) {
-    return initialized?HomePage():Container(
+    return initialized?
+    HomePage():
+    Container(
       alignment: Alignment.center,
       child: CircularProgressIndicator(),
     );

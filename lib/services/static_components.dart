@@ -5,7 +5,7 @@ class cUser{
   static var uid;
   static var photoURL;
   static var email;
-  static var lastSeen;
+  static var registered_date;
   static List blogs;
   static List saved_blogs=[];
   static List liked_blogs=[];

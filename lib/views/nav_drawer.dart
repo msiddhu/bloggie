@@ -23,11 +23,13 @@ class NavDrawer extends StatelessWidget {
 
             accountName: new Text(cUser.displayName),
             accountEmail: new Text(cUser.email),
-            currentAccountPicture: Image.network(cUser.photoURL),
+            currentAccountPicture: CircleAvatar(child:Image.network(cUser.photoURL) ),
+              decoration: BoxDecoration(color: Colors.indigo),
+              //backgroundColor:Colors.amber,
 
           ),
           new ListTile(
-            title: new Text("My Profile"),
+            title: new Text("Profile"),
             trailing: new Icon(Icons.person),
             onTap: () => {
               Navigator.push(context,
@@ -37,7 +39,7 @@ class NavDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             title: new Text("My Blogs"),
-            trailing: new Icon(Icons.person),
+            trailing: new Icon(Icons.auto_stories),
             onTap: () => {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => BlogTabBar())),
@@ -53,7 +55,7 @@ class NavDrawer extends StatelessWidget {
 
           ListTile(
             title: new Text("Settings"),
-            trailing: new Icon(Icons.person),
+            trailing: new Icon(Icons.settings_applications),
             onTap: () => {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => settings())),
@@ -62,7 +64,7 @@ class NavDrawer extends StatelessWidget {
           new ListTile(
             title: new Text("Sign Out ",style: TextStyle(fontSize: 25),),
             // trailing: new Icon(Icons.close),
-            onTap: () => AuthService.signOut(),
+            onTap: () => AuthService().signOut(),
           ),
         ],
       ),

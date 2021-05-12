@@ -1,7 +1,7 @@
-import 'package:bloggie/services/comments.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:bloggie/services/comments.dart';
 
 class CommentsView extends StatefulWidget {
 
@@ -48,7 +48,7 @@ class _CommentsViewState extends State<CommentsView> {
                     return commentTile(
                       mpdata["authorname"],
                       mpdata["comment"],
-                     mpdata["datetime"],
+                      mpdata["datetime"],
                     );
                   },
                 ),
@@ -118,11 +118,20 @@ class _commentTileState extends State<commentTile> {
             ),
           ),
 
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Flexible(child:Text(widget.comment,
-                softWrap: true, textAlign: TextAlign.justify)),
+          //Container(
+          //padding: EdgeInsets.symmetric(horizontal: 20),
+          //child:
+          Row(
+            children: [
+              SizedBox(width:20,),
+              Flexible(
+                child:Text(widget.comment,
+                    softWrap: true, textAlign: TextAlign.justify),
+              ),
+              SizedBox(width:20),
+            ],
           ),
+          // ),
           Align(
             alignment: Alignment.centerRight,
             child: Container(
@@ -143,5 +152,4 @@ class _commentTileState extends State<commentTile> {
     );
   }
 }
-
 

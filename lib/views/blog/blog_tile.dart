@@ -147,7 +147,7 @@ class _BlogTileState extends State<BlogTile> {
 
               Container(
 
-                child:widget.authorname==cUser.displayName?SizedBox(height:5):
+                child:widget.authorname==cUser.displayName?Container(height:30,child:Text("Created at : "+widget.time.toDate().toString().substring(0,16))):
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -162,7 +162,7 @@ class _BlogTileState extends State<BlogTile> {
                         widget.isliked?removelike(widget.documentId):addlike(widget.documentId);
                         setState(() => widget.isliked = ! widget.isliked);
                         print(widget.isliked);
-                        print("yooo broooooo");
+
                       },
                       icon: Icon(Icons.favorite,
                         color:  widget.isliked ? Colors.red:Colors.grey,

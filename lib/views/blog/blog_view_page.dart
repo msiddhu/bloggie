@@ -130,7 +130,7 @@ class WriteComment extends StatelessWidget {
                 comment=txt.text;
                 txt.clear();
                 if(comment.isEmpty){
-                  showAlertDialog(context,"The comment can't be empty").showDialog();
+                  showAlertDialog(context,"The comment can't be empty");
                 }
                 else{
                   comments.addComment(documentId, comment).then((value){
@@ -154,7 +154,8 @@ class WriteComment extends StatelessWidget {
     );
   }
 
-  showAlertDialog(BuildContext context,String message) {
+   showAlertDialog(BuildContext context,String message)
+   {
 
     // set up the button
     Widget okButton = FlatButton(

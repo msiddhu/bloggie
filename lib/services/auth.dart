@@ -10,7 +10,7 @@ class AuthService {
   static FirebaseFirestore _db = FirebaseFirestore.instance;
   // Shared State for Widgets
   static User user;
-  DocumentReference ref;
+  static DocumentReference ref;
   // firebase user
   // custom user data in Firestore
   // constructor
@@ -32,7 +32,7 @@ class AuthService {
     if(!(await _db.collection('users').doc(user.uid).get()).exists) {
       await createUserData(user);
     }
-    init();
+    await init();
     // Done
     print("signed in " + user.displayName);
     return user;
@@ -45,27 +45,33 @@ class AuthService {
       'email': user.email,
       'photoURL': user.photoURL,
       'displayName': user.displayName,
-      'lastSeen': DateTime.now(),
+      'registeredDate': DateTime.now(),
       'saved_blogs':[],
       'blogs':[],
 
     });
+    print('user created');
   }
 
-  static Future<bool> init() async {
+  static init() async {
 
-    cUser.userRef = _db.collection('users').doc((FirebaseAuth.instance.currentUser).uid);
+    cUser.userRef = _db.collection('users').doc((await FirebaseAuth.instance.currentUser).uid);
 
     DocumentSnapshot ds= await cUser.userRef.get();
+    if(ds.exists){
+      print("exists");
     cUser.email=ds.get('email');
+    cUser.registered_date=ds.get('registeredDate');
     cUser.displayName=ds.get('displayName');
     cUser.photoURL=ds.get('photoURL');
     cUser.uid=ds.get('uid');
     cUser.blogs=ds.get('blogs');
     cUser.saved_blogs=ds.get('saved_blogs');
-
+    cUser.ready=true;
+    }
     //cUser.blogCollection=FirebaseFirestore.instance.collection('blogs');
     print(cUser.saved_blogs);
+
     print("user details initiated");
     return true;
   }
@@ -73,6 +79,7 @@ class AuthService {
 
   void signOut() {
     _auth.signOut();
+    _googleSignIn.signOut();
   }
 }
 

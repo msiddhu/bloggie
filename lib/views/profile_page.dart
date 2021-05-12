@@ -22,73 +22,31 @@ class _profilePageState extends State<profilePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
 
-                SizedBox(height: 40,),
+                SizedBox(height: 30,),
 
-                Column(
+                Row(
                   children: [
-                    Image.network(cUser.photoURL),
                     SizedBox(width: 30,),
-                    Row(
+                    ClipOval(child: Image.network(cUser.photoURL)),
+                    SizedBox(width:25 ,),
+                Column(
                       children: [
-                        Text("Name: "+cUser.displayName,style: TextStyle(fontWeight: FontWeight.bold),),
-                        SizedBox(height: 30,),
-                        Text("Email:  "+cUser.email,style: TextStyle(fontWeight: FontWeight.bold),),
-                        SizedBox(height: 30,),
+                        Text(cUser.displayName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                        SizedBox(height: 10,),
+                        Text(cUser.email,style: TextStyle(fontWeight: FontWeight.bold),),
+                        SizedBox(height: 10,),
+
+
                       ],
                     )
 
                   ],
                 ),
-
+                SizedBox(height: 30,),
 
                 //under devlopment
-                Text("Country:"),
-                RaisedButton(
-                    child: Text("select country"),
-                    onPressed: (){
-                      showCountryPicker(
-                        context: context,
-                        showPhoneCode: false, // optional. Shows phone code before the country name.
-                        onSelect: (Country country) {
-                          setState(() {
-                            _selectedCountry=country.name;
-                            print('Select country: ${country.name}');
-                          });
-
-                        },
-                      );
-
-                    }),
-                Text("Gender :"),
-                CustomRadioButton(
-                  elevation: 0,
-                  absoluteZeroSpacing: true,
-                  unSelectedColor: Theme.of(context).canvasColor,
-                  buttonLables: [
-                    'Male',
-                    'Female'
-                  ],
-                  buttonValues: [
-                    "Male",
-                    "Female",
-                  ],
-                  buttonTextStyle: ButtonTextStyle(
-                      selectedColor: Colors.white,
-                      unSelectedColor: Colors.black,
-                      textStyle: TextStyle(fontSize: 16)),
-                  radioButtonValue: (value) {
-                    _gender=value;
-                    print(_gender);
-                  },
-                  selectedColor: Theme.of(context).accentColor,
-                ),
-
-
-                RaisedButton(
-                    child: Text("Save"),
-                    onPressed: (){})
-
-
+                Text("stats pending"),
+            Text("Registered :  "+ cUser.registered_date.toDate().toString().substring(0,16),style: TextStyle(fontWeight: FontWeight.bold),),
 
               ],
             ),
