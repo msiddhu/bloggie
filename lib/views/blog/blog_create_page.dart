@@ -193,7 +193,6 @@ class _CreateBlogState extends State<CreateBlog> {
     };
     print(blogMap);
     CrudMethods.addData(blogMap).then((result) {
-
       _isLoading=false;
       //showSnackBar();
       Navigator.pop(context);

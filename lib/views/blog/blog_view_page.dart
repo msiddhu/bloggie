@@ -5,6 +5,7 @@ import 'package:bloggie/services/save.dart';
 import 'package:bloggie/services/static_components.dart';
 import 'package:bloggie/views/blog/blog_edit_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'comments_view.dart';
@@ -187,7 +188,8 @@ class WriteComment extends StatelessWidget {
 
 
 class BlogViewTile extends StatefulWidget {
-  String imgUrl, title, description, authorname, time, documentId;
+  String imgUrl, title, description, authorname, documentId;
+  Timestamp time;
   bool isliked,issaved;
   int likecount;
 
@@ -346,7 +348,8 @@ class _BlogViewTileState extends State<BlogViewTile> {
                 child: Text(widget.likecount.toString()+like)):Container(),
 
             Container(
-              child: Row(
+              child:widget.authorname==cUser.displayName?SizedBox(height:5):
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   RaisedButton.icon(

@@ -1,6 +1,7 @@
 import 'package:bloggie/services/like.dart';
 import 'package:bloggie/services/save.dart';
 import 'package:bloggie/views/blog/blog_view_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,7 +10,8 @@ import 'package:bloggie/services/static_components.dart';
 
 
 class BlogTile extends StatefulWidget {
-  String imgUrl, title, description, authorname, time, documentId;
+  String imgUrl, title, description, authorname, documentId;
+  Timestamp time;
   bool isliked,issaved;
   int likecount;
   BlogTile(
@@ -144,7 +146,9 @@ class _BlogTileState extends State<BlogTile> {
                   child: Text(widget.likecount.toString()+like)):Container(),
 
               Container(
-                child: Row(
+
+                child:widget.authorname==cUser.displayName?SizedBox(height:5):
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     RaisedButton.icon(

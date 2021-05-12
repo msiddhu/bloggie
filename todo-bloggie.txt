@@ -1,4 +1,3 @@
-3 my blogs
 4 stats
 5 Settings
 9 routing 

@@ -16,6 +16,7 @@ class CrudMethods {
 
     if((ds.data() as Map)['blogs']==null){
       cUser.userRef.update({"blogs":[doc.id]});
+
     }
 
     else{
@@ -24,7 +25,7 @@ class CrudMethods {
       cUser.userRef.update({'blogs':list});
 
     }
-
+    cUser.blogs.add(doc.id);
   }
 
   static getAllData() async {
