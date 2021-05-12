@@ -44,10 +44,11 @@ class _CommentsViewState extends State<CommentsView> {
                   itemCount: snapshot.data.docs.length,
                   itemBuilder: (context, index) {
                     DocumentSnapshot ds = snapshot.data.docs[index];
+                    Map mpdata=ds.data() as Map;
                     return commentTile(
-                      (ds.data()as Map)["authorname"],
-                      (ds.data()as Map)["comment"],
-                      (ds.data()as Map)["datetime"],
+                      mpdata["authorname"],
+                      mpdata["comment"],
+                     mpdata["datetime"],
                     );
                   },
                 ),

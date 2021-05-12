@@ -1,0 +1,9 @@
+3 my blogs
+4 stats
+5 Settings
+9 routing 
+6 splash
+7 Searchbar
+
+8 username password
+9 anonymous user

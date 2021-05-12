@@ -21,13 +21,26 @@ class _profilePageState extends State<profilePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+
                 SizedBox(height: 40,),
-                cUser.photoURL==null?Text("Loading\nImage"):Image.network(cUser.photoURL),
-                SizedBox(height: 30,),
-                Text("Name: "+cUser.displayName??"loading",style: TextStyle(fontWeight: FontWeight.bold),),
-                SizedBox(height: 30,),
-                Text("Email:  "+cUser.email??"loading",style: TextStyle(fontWeight: FontWeight.bold),),
-                SizedBox(height: 30,),
+
+                Column(
+                  children: [
+                    Image.network(cUser.photoURL),
+                    SizedBox(width: 30,),
+                    Row(
+                      children: [
+                        Text("Name: "+cUser.displayName,style: TextStyle(fontWeight: FontWeight.bold),),
+                        SizedBox(height: 30,),
+                        Text("Email:  "+cUser.email,style: TextStyle(fontWeight: FontWeight.bold),),
+                        SizedBox(height: 30,),
+                      ],
+                    )
+
+                  ],
+                ),
+
+
                 //under devlopment
                 Text("Country:"),
                 RaisedButton(

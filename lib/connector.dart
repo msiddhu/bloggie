@@ -25,17 +25,16 @@ class _connectorState extends State<connector> {
     })
     }
     );
-
   }
 
   Future<bool> asyncMethod() async{
-   bool fg=await AuthService.init();
-   return fg;
+   return await AuthService.init();
   }
-
-
   @override
   Widget build(BuildContext context) {
-    return initialized?HomePage():Container(child: CircularProgressIndicator(),);
+    return initialized?HomePage():Container(
+      alignment: Alignment.center,
+      child: CircularProgressIndicator(),
+    );
   }
 }

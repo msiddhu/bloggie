@@ -22,6 +22,7 @@ class CrudMethods {
       var list=List.from((ds.data()as Map)['blogs']);
       list.add(doc.id);
       cUser.userRef.update({'blogs':list});
+
     }
 
   }
@@ -31,18 +32,19 @@ class CrudMethods {
     return cUser.blogCollection.snapshots();
   }
 
-  Future<Map<String, dynamic>> getData(documentId) async{
+  static Future<Map<String, dynamic>> getData(documentId) async{
     var temp=await cUser.blogCollection.doc(documentId).get();
     Map<String,dynamic> map=temp.data();
     print(map);
     return map;
   }
 
-  static updateData(updatedMap,documentId) async{
+  static Future<bool> updateData(updatedMap,documentId) async{
     var doc=cUser.blogCollection.doc(documentId);
     doc.update(updatedMap).catchError((e){
       print(e);
     });
+    return true;
   }
 
   static deleteData(documentId) async{

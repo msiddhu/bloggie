@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
   @override
   initState()  {
     super.initState();
-    crudMethods.getAllData().then((result) {
+    CrudMethods.getAllData().then((result) {
       setState(() {
         blogsStream = result;
       });

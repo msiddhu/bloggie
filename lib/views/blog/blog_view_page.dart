@@ -3,10 +3,11 @@ import 'package:bloggie/services/crud.dart';
 import 'package:bloggie/services/like.dart';
 import 'package:bloggie/services/save.dart';
 import 'package:bloggie/services/static_components.dart';
+import 'package:bloggie/views/blog/blog_edit_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../comments_view.dart';
+import 'comments_view.dart';
 
 
 
@@ -28,7 +29,7 @@ class _detailblogState extends State<detailblog> {
     // TODO: implement initState
     super.initState();
 
-    CrudMethods().getData(widget.documentId).then((mp){
+    CrudMethods.getData(widget.documentId).then((mp){
       setState(() {
         data=mp;
         like_user_ids=data["liked_user_ids"];
@@ -241,6 +242,8 @@ class _BlogViewTileState extends State<BlogViewTile> {
                   children:[
                     SizedBox(width: 20,),
                     RaisedButton(onPressed: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => EditBlog(blog_id:widget.documentId)));
 
 
                     },

@@ -133,7 +133,8 @@ class _CreateBlogState extends State<CreateBlog> {
                 ),
               ],
             ),
-          )),
+          )
+      ),
       floatingActionButton: FloatingActionButton.extended(
 
         splashColor: Colors.yellow[800],
@@ -186,7 +187,7 @@ class _CreateBlogState extends State<CreateBlog> {
       "title": title,
       "desc": desc,
       "liked_user_ids":[],
-      "time":DateTime.now().toString(),
+      "time":DateTime.now(),
       "likes_count":0,
       "commentIDs":[],
     };
