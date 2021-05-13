@@ -89,29 +89,31 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
           Text(
             "B",
-            style: TextStyle(fontSize: 50, color: Colors.blue[900]),
+            style: TextStyle(fontSize: 40, color: Colors.blue[900]),
           ),
           Text(
             "loggie",
             style: TextStyle(fontSize: 25, color: Colors.blue[50]),
           ),],),
 
-        actions:<Widget>[ Switch(
-            activeColor: Colors.blue,
-            inactiveTrackColor: Colors.grey,
-            inactiveThumbColor: Colors.grey,
-            value: cColors.darkmode,
-            onChanged: (bool value) {
-              setState(() {
-                print('Switch button: ' + value.toString());
-                cColors.darkmode=value;
-                main();
-              });
-            }
-        ),],
+        // actions:<Widget>[
+        //   Switch(
+        //     activeColor: Colors.blue,
+        //     inactiveTrackColor: Colors.grey,
+        //     inactiveThumbColor: Colors.grey,
+        //     value: cColors.darkmode,
+        //     onChanged: (bool value) {
+        //       setState(() {
+        //         print('Switch button: ' + value.toString());
+        //         cColors.darkmode=value;
+        //         main();
+        //       });
+        //     }
+        // ),],
 
       ),
       body: blogsStream!=null?

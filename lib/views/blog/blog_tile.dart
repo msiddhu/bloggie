@@ -157,7 +157,8 @@ class _BlogTileState extends State<BlogTile> {
                       ),
 
                       // highlightColor:Colors.pink,
-                      color: widget.isliked ? Colors.red[50]:Colors.grey[50],
+                     color: widget.isliked ? Colors.red[50]:Colors.grey[50],
+                      //color:Colors.deepOrange,
                       onPressed: () {
                         widget.isliked?removelike(widget.documentId):addlike(widget.documentId);
                         setState(() => widget.isliked = ! widget.isliked);
@@ -167,7 +168,7 @@ class _BlogTileState extends State<BlogTile> {
                       icon: Icon(Icons.favorite,
                         color:  widget.isliked ? Colors.red:Colors.grey,
                       ),
-                      label: Text('Like'),
+                      label: Text(''),
                       splashColor: Colors.red,
                     ),
 

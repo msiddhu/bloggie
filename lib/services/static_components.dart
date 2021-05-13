@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class cUser{
   static var displayName;
@@ -18,5 +21,6 @@ class cUser{
 }
 
 class cColors{
+  static Color appbarcolor=Colors.teal;
   static bool darkmode=false;
 }
