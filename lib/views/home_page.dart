@@ -116,9 +116,12 @@ class _HomePageState extends State<HomePage> {
         // ),],
 
       ),
-      body: blogsStream!=null?
-      blogsList():
-      Container(),
+      body: ListView(
+        children:[
+            SizedBox(height: 50),
+            blogsStream!=null?blogsList(): Container(),
+
+        ]),
       floatingActionButton: Container(
         //padding: EdgeInsets.symmetric(vertical: 15),
         child: Row(

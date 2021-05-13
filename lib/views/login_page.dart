@@ -9,26 +9,17 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-
-
-
-
   bool loading=false;
-
   Text blogTitle=Text("Bloggie",textAlign:TextAlign.center,style: TextStyle(fontSize: 40,fontWeight:FontWeight.bold,color:Colors.purple[900],
       shadows: <Shadow>[
-  //     Shadow(
-  //     offset: Offset(10.0, 10.0),
-  //   blurRadius: 3.0,
-  //   color: Color.fromARGB(255, 0, 0, 0),
-  // ),
       Shadow(
   offset: Offset(4.0, 4.0),
   blurRadius: 10.0,
   color: Color.fromARGB(125, 0, 0, 255),
   ),
   ],
-  ),);
+  ),
+  );
 
 
   Container logo =Container(
@@ -49,7 +40,6 @@ class _LoginPageState extends State<LoginPage> {
 
 
   Container loginButton = Container(
-    //decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
     padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 10),
 
     child: RaisedButton(

@@ -66,7 +66,9 @@ class NavDrawer extends StatelessWidget {
 
             trailing: new Icon(Icons.logout,color: Colors.red,),
             // trailing: new Icon(Icons.close),
-            onTap: () => AuthService().signOut(),
+            onTap: () => {AuthService().signOut(),
+
+            },
           ),
           Divider(),
           SizedBox(height: 60),

@@ -17,7 +17,6 @@ class cUser{
   static CollectionReference blogCollection;
   static CollectionReference commentsCollection;
   static bool ready=false;
-
 }
 
 class cColors{

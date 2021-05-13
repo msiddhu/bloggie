@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bloggie/services/static_components.dart';
 
+import 'open_page.dart';
+
 class connector extends StatefulWidget {
   const connector({Key key}) : super(key: key);
 
@@ -12,40 +14,37 @@ class connector extends StatefulWidget {
 }
 
 class _connectorState extends State<connector> {
-  bool initialized=false;
+  bool initialized = false;
 
   @override
-  void initState(){
-    // TODO: implement initState
-
-    if(!cUser.ready)
-    {
-    asyncMethod().then((flag) => {
-      setState(() {
-    print("after initialization");
-    initialized=flag;
-    })
-    }
-    );
-    }
-    initialized=true;
+  void initState() {
     super.initState();
+
+    // TODO: implement initState
+   // if (!cUser.ready) {
+      asyncMethod().then((flag) =>
+      {
+        setState(() {
+          print("after initialization");
+          initialized = flag;
+        })
+      }
+      );
+    // //}
+    // initialized = true;
+
   }
 
-  Future<bool> asyncMethod() async{
-    bool gh=await AuthService.init();
-   return  gh;
+  Future<bool> asyncMethod() async {
+    bool gh = await AuthService.init();
+    return gh;
   }
-
 
 
   @override
   Widget build(BuildContext context) {
-    return initialized?
-    HomePage():
-    Container(
-      alignment: Alignment.center,
-      child: CircularProgressIndicator(),
-    );
+
+    return initialized ? HomePage() : OpenPage();
+
   }
 }

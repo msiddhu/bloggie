@@ -8,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'open_page.dart';
+
 
 void  main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Bloggie',
         theme: buildThemeData(),
-        home: _getLandingPage()
+        home: _getLandingPage(),
     );
   }
 

@@ -1,6 +1,10 @@
 1 stats
+--total number of like
+-- total number of blogs written
 2 unified colors
 3 Settings
+ --dark mode
+ -- delete account
 4 routing
 5 animations
 6 sorting
