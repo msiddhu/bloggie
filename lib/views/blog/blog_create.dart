@@ -183,6 +183,7 @@ class _CreateBlogState extends State<CreateBlog> {
     print("this is the downloadURL" + downloadUrl);
     Map<String, dynamic> blogMap = {
       "imgUrl": downloadUrl,
+      "uid":cUser.uid,
       "authorName": cUser.displayName,
       "title": title,
       "desc": desc,

@@ -1,6 +1,7 @@
 import 'package:bloggie/services/like.dart';
 import 'package:bloggie/services/save.dart';
 import 'package:bloggie/views/blog/blog_view.dart';
+import 'package:bloggie/views/profile/user_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,13 @@ import 'package:bloggie/services/static_components.dart';
 
 
 class BlogTile extends StatefulWidget {
-  String imgUrl, title, description, authorname, documentId;
+  String imgUrl, title, description, authorname, documentId,uid;
   Timestamp time;
   bool isliked,issaved;
   int likecount;
   BlogTile(
       {@required this.imgUrl,
+        @required this.uid,
         @required this.authorname,
         @required this.description,
         @required this.title,
@@ -81,11 +83,18 @@ class _BlogTileState extends State<BlogTile> {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   // color: Colors.red,
-                  child: Text("~" + widget.authorname,
-                      style: TextStyle(
-                        color: Colors.blue[600],
-                        fontSize: 12,
-                      )),
+                  child: GestureDetector(
+                    onTap:(){
+                      print("to user profile page");
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => UserProfile(widget.uid)));
+                    },
+                    child: Text("~" + widget.authorname,
+                        style: TextStyle(
+                          color: Colors.blue[600],
+                          fontSize: 12,
+                        )),
+                  ),
                 ),
               ),
 
@@ -198,9 +207,7 @@ class _BlogTileState extends State<BlogTile> {
                       splashColor: Colors.lightGreen,
                     ),
 
-
                     Divider(),
-
                     RaisedButton(
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(25.0),

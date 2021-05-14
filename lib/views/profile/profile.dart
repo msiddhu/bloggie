@@ -61,8 +61,10 @@ class _ProfileState extends State<Profile> {
                         unfollowuser(uid).then((_){
                           setState(() {
                             follow_text="Follow";
-                          });
-                        });
+                          }
+                          );
+                        }
+                        );
                       }
 
                     },

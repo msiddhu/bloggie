@@ -11,7 +11,7 @@ class _FollowingState extends State<Following> {
   @override
   Widget build(BuildContext context) {
 
-    return Container(child:Text("followers page"),);
+    return Container(child:Text("following page"),);
 
   }
 }

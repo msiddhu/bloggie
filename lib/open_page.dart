@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'connector.dart';
+import 'custom_widgets.dart';
 
 class OpenPage extends StatefulWidget {
   const OpenPage({Key key}) : super(key: key);
@@ -65,15 +66,7 @@ class _OpenPageState extends State<OpenPage> {
               SizedBox(height: 100.0),
 
                      // alignment: Alignment.center,
-              Container(
-                alignment: Alignment.center,
-                child:CircularProgressIndicator(
-
-                  backgroundColor: Colors.red,
-                  strokeWidth: 10.0,
-
-                ),
-              ),
+              CircleProgress(),
 
 
 
@@ -87,3 +80,4 @@ class _OpenPageState extends State<OpenPage> {
   }
 
 }
+

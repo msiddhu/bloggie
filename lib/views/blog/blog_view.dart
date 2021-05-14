@@ -4,6 +4,7 @@ import 'package:bloggie/services/like.dart';
 import 'package:bloggie/services/save.dart';
 import 'package:bloggie/services/static_components.dart';
 import 'package:bloggie/views/blog/blog_edit.dart';
+import 'package:bloggie/views/profile/user_profile.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,6 +69,7 @@ class _detailblogState extends State<detailblog> {
             children:<Widget>[
               BlogViewTile(
                 imgUrl:data["imgUrl"],
+                uid:data['uid'],
                 authorname: data["authorName"],
                 title: data["title"],
                 description: data["desc"],
@@ -189,13 +191,14 @@ class WriteComment extends StatelessWidget {
 
 
 class BlogViewTile extends StatefulWidget {
-  String imgUrl, title, description, authorname, documentId;
+  String imgUrl, title,uid, description, authorname, documentId;
   Timestamp time;
   bool isliked,issaved;
   int likecount;
 
   BlogViewTile(
       {
+        @required this.uid,
         @required this.imgUrl,
         @required this.authorname,
         @required this.description,
@@ -240,7 +243,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
                   fontSize: 25,
                 )),
             Container(
-              child:widget.authorname==cUser.displayName?
+              child:widget.uid==cUser.uid?
               Row(
                   children:[
                     SizedBox(width: 20,),
@@ -286,11 +289,17 @@ class _BlogViewTileState extends State<BlogViewTile> {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 // color: Colors.red,
-                child: Text("~" + widget.authorname,
-                    style: TextStyle(
-                      color: Colors.blue[600],
-                      fontSize: 12,
-                    )),
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => UserProfile(widget.uid)));
+                  },
+                  child: Text("~" + widget.authorname,
+                      style: TextStyle(
+                        color: Colors.blue[600],
+                        fontSize: 12,
+                      )),
+                ),
               ),
             ),
 

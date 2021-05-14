@@ -1,14 +1,16 @@
 import 'package:bloggie/services/crud.dart';
 import 'package:bloggie/views/blog/blog_tile.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bloggie/services/static_components.dart';
 import 'package:flutter/material.dart';
+import 'package:bloggie/custom_widgets.dart';
+
 
 class AllBlogs extends StatefulWidget {
   List bloglist;
+  bool neverscroll;
  // const SavedBlogs({Key key}) : super(key: key);
-  AllBlogs(this.bloglist);
+  AllBlogs(this.bloglist,this.neverscroll);
 
   @override
   _AllBlogsState createState() => _AllBlogsState();
@@ -21,14 +23,12 @@ class _AllBlogsState extends State<AllBlogs> with AutomaticKeepAliveClientMixin{
   void initState() {
     print(widget.bloglist);
     blogslist=widget.bloglist;
-
-    // blogslist=cUser.savedBlogs;
-    filldata(blogslist);
-    // TODO: implement initState
+    fillBlogData(blogslist);
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
+    if(widget.neverscroll){
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -41,17 +41,9 @@ class _AllBlogsState extends State<AllBlogs> with AutomaticKeepAliveClientMixin{
           islike=like_user_ids.contains(cUser.uid);
           }
           return blogsmp[index]==null?
-          Container(
-          margin: const EdgeInsets.all(10.0),
-          padding: const EdgeInsets.all(10.0),
-          decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(10)),
-
-          height:100,
-          child:CircularProgressIndicator(),
-          alignment: Alignment.center,
-
-          ):
+          CircleProgressBox():
           BlogTile(
+            uid:mpdata['uid'],
             authorname: mpdata["authorName"],
             imgUrl:mpdata["imgUrl"],
             title:mpdata["title"],
@@ -59,18 +51,47 @@ class _AllBlogsState extends State<AllBlogs> with AutomaticKeepAliveClientMixin{
             time: mpdata["time"],
             documentId: mpdata["documentId"],
             issaved: (cUser.savedBlogs).contains(mpdata["documentId"]),
-           // likecount: mpdata["likes_count"],
             likecount: 0,
             isliked: islike,
           );
 
 
         }
-    );
+    );}
+    else{
+      return ListView.builder(
+          shrinkWrap: true,
+          itemCount: blogslist.length,
+          itemBuilder:(context,index){
+            Map mpdata=blogsmp[index];
+            bool islike=false;
+            if(mpdata!=null){
+              List like_user_ids=mpdata["liked_user_ids"]==null?["nothing"]:mpdata["liked_user_ids"];
+            islike=like_user_ids.contains(cUser.uid);
+            }
+            return blogsmp[index]==null?
+            CircleProgressBox():
+            BlogTile(
+            uid:mpdata['uid'],
+            authorname: mpdata["authorName"],
+            imgUrl:mpdata["imgUrl"],
+            title:mpdata["title"],
+            description: mpdata["desc"],
+            time: mpdata["time"],
+            documentId: mpdata["documentId"],
+            issaved: (cUser.savedBlogs).contains(mpdata["documentId"]),
+            likecount: 0,
+            isliked: islike,
+            );
+
+
+          }
+      );
+    }
 
 
   }
-  filldata(blogslist) async{
+  fillBlogData(blogslist) async{
     blogsmp=List.filled(blogslist.length, null);
     for(var i=0;i<blogslist.length;i++){
       Map mp=await CrudMethods.getBlogData(blogslist[i]);
@@ -88,3 +109,5 @@ class _AllBlogsState extends State<AllBlogs> with AutomaticKeepAliveClientMixin{
   bool get wantKeepAlive => true;
 
 }
+
+

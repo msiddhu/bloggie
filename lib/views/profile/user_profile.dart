@@ -41,7 +41,7 @@ class _UserProfileState extends State<UserProfile> {
             children:[
               flag?Profile(mp):Container(child:Text(widget.uid)),
               SizedBox(height: 25,),
-              flag?AllBlogs(mp['blogs']):Container(),
+              flag?AllBlogs(mp['blogs'],true):Container(),
             ]
         ),
       ),

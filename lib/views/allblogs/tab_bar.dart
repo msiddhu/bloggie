@@ -77,8 +77,8 @@ class _BlogTabBarState extends State<BlogTabBar> {
 
            // MyBlogs(),
 
-            AllBlogs(cUser.blogs),
-            AllBlogs(cUser.savedBlogs),
+            AllBlogs(cUser.blogs,false),
+            AllBlogs(cUser.savedBlogs,false),
             Following(),
 
           ],

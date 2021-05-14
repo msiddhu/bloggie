@@ -1,4 +1,3 @@
-import 'package:bloggie/main.dart';
 import 'package:bloggie/services/crud.dart';
 import 'package:bloggie/services/static_components.dart';
 import 'package:bloggie/views/blog/blog_create.dart';
@@ -6,7 +5,7 @@ import 'package:bloggie/views/nav_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'blog/blog_tile.dart';
-import 'dart:developer' as developer;
+//import 'dart:developer' as developer;
 
 
 class HomePage extends StatefulWidget {
@@ -41,18 +40,16 @@ class _HomePageState extends State<HomePage> {
 
           else{
             return ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: snapshot.data.docs.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot ds = snapshot.data.docs[index];
                 var mpdata=ds.data() as Map;
                 List like_user_ids=mpdata["liked_user_ids"]==null?["nothing"]:mpdata["liked_user_ids"];
-               // developer.log(like_user_ids.toString(),name:"liked_user_ids");
-                //developer.log(cUser.uid,name:"liked_user_id");
-
                 bool islike=like_user_ids.contains(cUser.uid);
-             //   developer.log(islike.toString(),name:"isLiked");
                 return BlogTile(
+                uid:mpdata['uid'],
                 authorname: mpdata["authorName"],
                 imgUrl: mpdata["imgUrl"],
                 title:mpdata["title"],
@@ -86,10 +83,7 @@ class _HomePageState extends State<HomePage> {
       extendBodyBehindAppBar: true,
       drawer: NavDrawer(),
       appBar: AppBar(
-
-
         actions: <Widget>[
-          dropdown(),
         ],
         backgroundColor: Colors.teal,
         title: Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
@@ -105,7 +99,11 @@ class _HomePageState extends State<HomePage> {
         ),
 
       ),
-      body:blogsStream!=null?blogsList(): Container(),
+      body:ListView(
+          children:[
+            dropdown(),
+            blogsStream!=null?blogsList(): Container()]),
+
 
 
       floatingActionButton: Container(
@@ -121,58 +119,72 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => CreateBlog()));
               },
-             // icon: Icon(Icons.add),
             ),
-
           ],
         ),
       ),
     );
   }
   Widget dropdown(){
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.end,
-    children: [
-      Container(
-  padding: EdgeInsets.symmetric(horizontal: 5.0),
-    decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(5.0),
-    border: Border.all(
-    color: Colors.indigo, style: BorderStyle.solid, width: 2),
+  return Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18.0),
+                border: Border.all(
+                    color: Colors.black54, style: BorderStyle.solid, width: 2
+                ),
+              ),
+                child: Row(
+                  children: [
+                    SizedBox(width:10),
+                    Text("Sort by  "),
+                    Container(
+          padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+
+                      child: DropdownButton(
+                        isDense:true,
+                        hint: _dropDownValue == null
+                            ? Text('Sort By')
+                            : Text(
+                          _dropDownValue,
+                          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                        ),
+                       // isExpanded: true,
+                        iconSize: 30.0,
+                        style: TextStyle(color: Colors.black),
+                        items: ['time', 'likes_count'].map(
+                              (val) {
+                            return DropdownMenuItem<String>(
+                              value: val,
+                              child: Text(val, style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (val) {
+                          filldata(value:val);
+                          setState(
+                                () {
+                                  _dropDownValue = val;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+            ],
     ),
-        child: DropdownButton(
-          isDense:true,
-          hint: _dropDownValue == null
-              ? Text('Sort By')
-              : Text(
-            _dropDownValue,
-            style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
-          ),
-         // isExpanded: true,
-          iconSize: 30.0,
-          style: TextStyle(color: Colors.black),
-          items: ['time', 'likes_count'].map(
-                (val) {
-              return DropdownMenuItem<String>(
-                value: val,
-                child: Text(val, style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-              );
-            },
-          ).toList(),
-          onChanged: (val) {
-            filldata(value:val);
-            setState(
-                  () {
-                    _dropDownValue = val;
-              },
-            );
-          },
-        ),
-      ),
-    ],
   );
+
   }
  void filldata({value:'time'}){
+    print(value);
   CrudMethods.getAllData(value).then((result) {
     print("refreshed");
     setState(() {
