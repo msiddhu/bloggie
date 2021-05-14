@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'static_components.dart';
+import '../utils/static_components.dart';
 
 
 //add like

@@ -1,7 +1,7 @@
-import 'package:bloggie/services/utils.dart';
+import 'package:bloggie/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:bloggie/services/static_components.dart';
+import 'package:bloggie/utils/static_components.dart';
 
 class Profile extends StatefulWidget {
   Map mpdata;

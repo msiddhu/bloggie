@@ -1,5 +1,5 @@
 import 'package:bloggie/services/auth.dart';
-import 'package:bloggie/services/static_components.dart';
+import 'package:bloggie/utils/static_components.dart';
 import 'package:bloggie/views/profile/my_profile.dart';
 import 'package:bloggie/views/settings_page.dart';
 import 'package:google_fonts/google_fonts.dart';

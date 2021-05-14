@@ -1,13 +1,13 @@
 import 'package:bloggie/services/like.dart';
 import 'package:bloggie/services/save.dart';
-import 'package:bloggie/views/blog/blog_view.dart';
+import 'package:bloggie/views/blog_crud/blog_view.dart';
 import 'package:bloggie/views/profile/user_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:bloggie/services/static_components.dart';
+import 'package:bloggie/utils/static_components.dart';
 
 
 class BlogTile extends StatefulWidget {

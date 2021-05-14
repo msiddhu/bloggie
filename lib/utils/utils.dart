@@ -1,4 +1,4 @@
-import 'package:bloggie/services/static_components.dart';
+import 'package:bloggie/utils/static_components.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,21 +35,3 @@ class Utils{
 }
 
 
-class CircleProgress extends StatelessWidget {
-  const CircleProgress({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child:CircularProgressIndicator(
-
-        backgroundColor: Colors.red,
-        strokeWidth: 10.0,
-
-      ),
-    );
-  }
-}

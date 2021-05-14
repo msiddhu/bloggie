@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'dart:ui';
-import 'package:bloggie/services/static_components.dart';
+import 'package:bloggie/utils/static_components.dart';
 import 'package:bloggie/services/crud.dart';
-import 'package:bloggie/views/blog/blog_view.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:bloggie/views/blog_crud/blog_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';

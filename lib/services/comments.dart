@@ -1,10 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'static_components.dart';
-//set Comment
-//get  all comment
-
+import 'package:bloggie/utils/static_components.dart';
 
 class commentMethods {
 

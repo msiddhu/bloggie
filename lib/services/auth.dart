@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'static_components.dart';
+import '../utils/static_components.dart';
 
 class AuthService {
   // Dependencies

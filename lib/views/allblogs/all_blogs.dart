@@ -1,9 +1,9 @@
 import 'package:bloggie/services/crud.dart';
-import 'package:bloggie/views/blog/blog_tile.dart';
+import 'package:bloggie/views/blog_crud/blog_tile.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:bloggie/services/static_components.dart';
+import 'package:bloggie/utils/static_components.dart';
 import 'package:flutter/material.dart';
-import 'package:bloggie/custom_widgets.dart';
+import 'package:bloggie/utils/custom_widgets.dart';
 
 
 class AllBlogs extends StatefulWidget {

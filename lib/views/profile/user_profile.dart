@@ -1,4 +1,4 @@
-import 'package:bloggie/services/utils.dart';
+import 'package:bloggie/utils/utils.dart';
 import 'package:bloggie/views/allblogs/all_blogs.dart';
 import 'package:bloggie/views/profile/profile.dart';
 import 'package:flutter/cupertino.dart';

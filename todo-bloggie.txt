@@ -1,4 +1,4 @@
-1 edit delete is uid not display name
+1. Extendible blogtile with minmum height and max put 2000 letter limit to desc
 
 2 stats
 --total number of like

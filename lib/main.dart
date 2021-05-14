@@ -1,6 +1,6 @@
-import 'package:bloggie/connector.dart';
+import 'package:bloggie/utils/connector.dart';
 import 'package:bloggie/services/auth.dart';
-import 'package:bloggie/services/static_components.dart';
+import 'package:bloggie/utils/static_components.dart';
 
 import 'package:bloggie/views/home_page.dart';
 import 'package:bloggie/views/login_page.dart';
@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'open_page.dart';
+import 'views/open_page.dart';
 
 
 void  main() async {

@@ -2,7 +2,7 @@
 import 'package:bloggie/views/allblogs/all_blogs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:bloggie/services/static_components.dart';
+import 'package:bloggie/utils/static_components.dart';
 import 'following_list.dart';
 
 class BlogTabBar extends StatefulWidget {

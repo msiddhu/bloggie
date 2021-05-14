@@ -1,11 +1,10 @@
 import 'package:bloggie/services/crud.dart';
-import 'package:bloggie/services/static_components.dart';
-import 'package:bloggie/views/blog/blog_create.dart';
+import 'package:bloggie/utils/static_components.dart';
+import 'package:bloggie/views/blog_crud/blog_create.dart';
+import 'package:bloggie/views/blog_crud/blog_tile.dart';
 import 'package:bloggie/views/nav_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'blog/blog_tile.dart';
-//import 'dart:developer' as developer;
 
 
 class HomePage extends StatefulWidget {

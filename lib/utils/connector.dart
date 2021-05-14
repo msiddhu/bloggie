@@ -2,9 +2,9 @@ import 'package:bloggie/services/auth.dart';
 import 'package:bloggie/views/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:bloggie/services/static_components.dart';
+import 'package:bloggie/utils/static_components.dart';
 
-import 'open_page.dart';
+import '../views/open_page.dart';
 
 class connector extends StatefulWidget {
   const connector({Key key}) : super(key: key);
