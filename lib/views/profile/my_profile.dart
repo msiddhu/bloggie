@@ -1,4 +1,5 @@
 import 'package:bloggie/views/profile/profile.dart';
+import 'package:bloggie/views/profile/stats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bloggie/services/static_components.dart';
@@ -15,18 +16,15 @@ class _profilePageState extends State<profilePage> {
         appBar: AppBar(title: Text("My Profile"),),
         body:Column(
           children: [
-            CommonProfile(cUser.alldetails()),
-            MyStats(),
+            Profile(cUser.alldetails()),
+            Stats(),
           ],
         )
 
     );
   }
 
-  Container MyStats(){
-   return  Container(
-       child:Text("Stats"));
-  }
+
 
 
 }

@@ -5,30 +5,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:bloggie/services/static_components.dart';
 import 'package:flutter/material.dart';
 
-class SavedBlogs extends StatefulWidget {
-  const SavedBlogs({Key key}) : super(key: key);
+class AllBlogs extends StatefulWidget {
+  List bloglist;
+ // const SavedBlogs({Key key}) : super(key: key);
+  AllBlogs(this.bloglist);
 
   @override
-  _SavedBlogsState createState() => _SavedBlogsState();
+  _AllBlogsState createState() => _AllBlogsState();
 }
 
-class _SavedBlogsState extends State<SavedBlogs> with AutomaticKeepAliveClientMixin{
-  List blogslist;
-  List blogsmp;
+class _AllBlogsState extends State<AllBlogs> with AutomaticKeepAliveClientMixin{
+  List blogslist=[];
+  List blogsmp=[];
   @override
   void initState() {
-    print(cUser.savedBlogs);
-    print(cUser.photoURL);
-    blogslist=cUser.savedBlogs;
-    print('saved blogslist'+blogslist.toString());
-    filldata(blogslist);
+    print(widget.bloglist);
+    blogslist=widget.bloglist;
 
+    // blogslist=cUser.savedBlogs;
+    filldata(blogslist);
     // TODO: implement initState
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: blogslist.length,
         itemBuilder:(context,index){
@@ -71,7 +73,7 @@ class _SavedBlogsState extends State<SavedBlogs> with AutomaticKeepAliveClientMi
   filldata(blogslist) async{
     blogsmp=List.filled(blogslist.length, null);
     for(var i=0;i<blogslist.length;i++){
-      Map mp=await CrudMethods.getData(blogslist[i]);
+      Map mp=await CrudMethods.getBlogData(blogslist[i]);
       setState(() {
         blogsmp[i]=mp;
       }

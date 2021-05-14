@@ -35,7 +35,7 @@ class CrudMethods {
     return d.snapshots();
   }
 
-  static Future<Map<String, dynamic>> getData(documentId) async{
+  static Future<Map<String, dynamic>> getBlogData(documentId) async{
     var temp=await cUser.blogCollection.doc(documentId).get();
     Map<String,dynamic> map=temp.data();
     print(map);

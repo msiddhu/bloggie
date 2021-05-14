@@ -1,4 +1,5 @@
 import 'package:bloggie/services/utils.dart';
+import 'package:bloggie/views/allblogs/all_blogs.dart';
 import 'package:bloggie/views/profile/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,6 @@ class _UserProfileState extends State<UserProfile> {
     // TODO: implement initState
     super.initState();
     getuserdetails(widget.uid).then((value){
-
       mp=value;
       setState(() {
         print("yes flag");
@@ -36,19 +36,16 @@ class _UserProfileState extends State<UserProfile> {
       appBar:AppBar(
         title:Text("User Profile"),
       ),
-      body:Column(
-          children:[
-            flag?CommonProfile(mp):Container(child:Text(widget.uid)),
-            UserBlogs(),
-
-          ]
+      body:Container(
+        child: ListView(
+            children:[
+              flag?Profile(mp):Container(child:Text(widget.uid)),
+              SizedBox(height: 25,),
+              flag?AllBlogs(mp['blogs']):Container(),
+            ]
+        ),
       ),
     );
   }
 
-  Container UserBlogs(){
-    return Container(
-      child:Text("User Posts"),
-    );
-  }
 }

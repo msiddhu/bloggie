@@ -1,8 +1,8 @@
-import 'package:bloggie/views/allblogs/my_blogs.dart';
-import 'package:bloggie/views/allblogs/saved_blogs.dart';
+
+import 'package:bloggie/views/allblogs/all_blogs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:bloggie/services/static_components.dart';
 import 'following_list.dart';
 
 class BlogTabBar extends StatefulWidget {
@@ -26,6 +26,9 @@ class _BlogTabBarState extends State<BlogTabBar> {
   }
   @override
   Widget build(BuildContext context) {
+    print(cUser.blogs);
+    print('saved blogs');
+    print(cUser.savedBlogs);
     return DefaultTabController(
       length:3,
       initialIndex: 0,
@@ -72,8 +75,10 @@ class _BlogTabBarState extends State<BlogTabBar> {
         body: TabBarView(
           children: [
 
-            MyBlogs(),
-            SavedBlogs(),
+           // MyBlogs(),
+
+            AllBlogs(cUser.blogs),
+            AllBlogs(cUser.savedBlogs),
             Following(),
 
           ],

@@ -30,7 +30,7 @@ class _detailblogState extends State<detailblog> {
     // TODO: implement initState
     super.initState();
 
-    CrudMethods.getData(widget.documentId).then((mp){
+    CrudMethods.getBlogData(widget.documentId).then((mp){
       setState(() {
         data=mp;
         like_user_ids=data["liked_user_ids"];

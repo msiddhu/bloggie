@@ -1,16 +1,23 @@
-delete comment
+edit delete is uid not display name
 
 1 stats
 --total number of like
 -- total number of blogs written
+
 2 unified colors
+
 3 Settings
  --dark mode
  -- delete account
+
 4 routing
-5 animations
-6 sorting
+
+5 animations(transitions)
+
 8 Searchbar
+
 9 username password
+
 10 anonymous user
+
 11 website ios

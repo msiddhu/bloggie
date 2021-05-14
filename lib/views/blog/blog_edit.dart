@@ -215,7 +215,7 @@ class _EditBlogState extends State<EditBlog> {
   }
 
   Future<Map> getBlog(blog_id) async{
-    Map<String,dynamic> mpdata=await CrudMethods.getData(blog_id);
+    Map<String,dynamic> mpdata=await CrudMethods.getBlogData(blog_id);
     return mpdata;
   }
 
@@ -223,7 +223,7 @@ class _EditBlogState extends State<EditBlog> {
     setState(() {
       _isLoading = true;
     });
-    Map map=await CrudMethods.getData(widget.blog_id);
+    Map map=await CrudMethods.getBlogData(widget.blog_id);
     map['title']=title_controller.text;
     map['desc']=desc_controller.text;
     map['updated_time']=DateTime.now();
