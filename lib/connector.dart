@@ -21,7 +21,6 @@ class _connectorState extends State<connector> {
     super.initState();
 
     // TODO: implement initState
-   // if (!cUser.ready) {
       asyncMethod().then((flag) =>
       {
         setState(() {
@@ -30,10 +29,9 @@ class _connectorState extends State<connector> {
         })
       }
       );
-    // //}
-    // initialized = true;
+    }
 
-  }
+
 
   Future<bool> asyncMethod() async {
     bool gh = await AuthService.init();

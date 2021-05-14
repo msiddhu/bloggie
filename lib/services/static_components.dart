@@ -8,15 +8,30 @@ class cUser{
   static var uid;
   static var photoURL;
   static var email;
-  static var registered_date;
+  static var registeredDate;
   static List blogs;
-  static List saved_blogs=[];
-  static List liked_blogs=[];
-  static List commentId=[];
+  static List savedBlogs=[];
+  static List likedBlogs=[];
+  static List following=[];
+ // static List commentId=[];
   static DocumentReference userRef;
   static CollectionReference blogCollection;
   static CollectionReference commentsCollection;
   static bool ready=false;
+  static Map alldetails(){
+    Map mp={
+      'displayName':displayName,
+      'email':email,
+      'uid':uid,
+      'photoURL':photoURL,
+      'registeredDate':registeredDate,
+      'blogs':blogs,
+      'savedBlogs':savedBlogs,
+      'likedBlogs':likedBlogs,
+      'ready':ready,
+    };
+    return mp;
+  }
 }
 
 class cColors{

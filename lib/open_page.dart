@@ -65,11 +65,16 @@ class _OpenPageState extends State<OpenPage> {
               SizedBox(height: 100.0),
 
                      // alignment: Alignment.center,
-              CircularProgressIndicator(
-                        backgroundColor: Colors.red,
-                        strokeWidth: 10.0,
+              Container(
+                alignment: Alignment.center,
+                child:CircularProgressIndicator(
 
-                      ),
+                  backgroundColor: Colors.red,
+                  strokeWidth: 10.0,
+
+                ),
+              ),
+
 
 
               //loginButton,

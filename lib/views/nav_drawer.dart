@@ -1,6 +1,6 @@
 import 'package:bloggie/services/auth.dart';
 import 'package:bloggie/services/static_components.dart';
-import 'package:bloggie/views/profile_page.dart';
+import 'package:bloggie/views/profile/my_profile.dart';
 import 'package:bloggie/views/settings_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,9 +22,9 @@ class NavDrawer extends StatelessWidget {
         children: <Widget>[
           new UserAccountsDrawerHeader(
 
-            accountName: new Text(cUser.displayName),
-            accountEmail: new Text(cUser.email),
-            currentAccountPicture: CircleAvatar(child:Image.network(cUser.photoURL) ),
+            accountName:Text(cUser.displayName),
+            accountEmail: Text(cUser.email),
+            currentAccountPicture: CircleAvatar(child:Image.network(cUser.photoURL)),
               decoration: BoxDecoration(
                   //color: Colors.indigo,
                   gradient: LinearGradient(colors: [Colors.blue[900],Colors.lightBlueAccent])),
@@ -53,7 +53,7 @@ class NavDrawer extends StatelessWidget {
 
           ListTile(
             title: new Text("Settings"),
-            trailing: new Icon(Icons.settings_applications,color:Colors.purple),
+            trailing: new Icon(Icons.settings,color:Colors.purple),
             onTap: () => {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => settings())),

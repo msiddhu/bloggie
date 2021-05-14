@@ -1,3 +1,5 @@
+delete comment
+
 1 stats
 --total number of like
 -- total number of blogs written
@@ -8,7 +10,6 @@
 4 routing
 5 animations
 6 sorting
-7 splash
 8 Searchbar
 9 username password
 10 anonymous user

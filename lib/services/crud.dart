@@ -28,9 +28,11 @@ class CrudMethods {
     cUser.blogs.add(doc.id);
   }
 
-  static getAllData() async {
+  static getAllData(String value) async {
     cUser.blogCollection=FirebaseFirestore.instance.collection('blogs');
-    return cUser.blogCollection.snapshots();
+    var d=FirebaseFirestore.instance.collection('blogs').orderBy(value,descending:true);
+
+    return d.snapshots();
   }
 
   static Future<Map<String, dynamic>> getData(documentId) async{

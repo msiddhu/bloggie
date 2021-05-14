@@ -3,7 +3,7 @@ import 'package:bloggie/services/crud.dart';
 import 'package:bloggie/services/like.dart';
 import 'package:bloggie/services/save.dart';
 import 'package:bloggie/services/static_components.dart';
-import 'package:bloggie/views/blog/blog_edit_page.dart';
+import 'package:bloggie/views/blog/blog_edit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -71,7 +71,7 @@ class _detailblogState extends State<detailblog> {
                 authorname: data["authorName"],
                 title: data["title"],
                 description: data["desc"],
-                issaved:(cUser.saved_blogs).contains(data["documentId"]) ,
+                issaved:(cUser.savedBlogs).contains(data["documentId"]) ,
                 time:data["time"],
                 documentId: data["documentId"],
                 likecount: data["likes_count"],
@@ -390,7 +390,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
 
                     color: widget.issaved ?Colors.lime[50]: Colors.grey[50],
                     onPressed: () async {
-                      print(cUser.saved_blogs);
+                      print(cUser.savedBlogs);
                       await widget.issaved ? unsaveblog(widget.documentId):saveblog(widget.documentId);
                       setState(() => widget.issaved = !widget.issaved);
                     },

@@ -1,7 +1,7 @@
 import 'package:bloggie/main.dart';
 import 'package:bloggie/services/crud.dart';
 import 'package:bloggie/services/static_components.dart';
-import 'package:bloggie/views/blog/blog_create_page.dart';
+import 'package:bloggie/views/blog/blog_create.dart';
 import 'package:bloggie/views/nav_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String _dropDownValue="time";
 
   CrudMethods crudMethods = new CrudMethods();
   Stream blogsStream;
@@ -27,8 +28,6 @@ class _HomePageState extends State<HomePage> {
   Widget blogsList() {
 
     return Container(
-
-
       child: StreamBuilder<QuerySnapshot>(
         stream: blogsStream,
         builder: (context, snapshot) {
@@ -48,11 +47,11 @@ class _HomePageState extends State<HomePage> {
                 DocumentSnapshot ds = snapshot.data.docs[index];
                 var mpdata=ds.data() as Map;
                 List like_user_ids=mpdata["liked_user_ids"]==null?["nothing"]:mpdata["liked_user_ids"];
-                developer.log(like_user_ids.toString(),name:"liked_user_ids");
+               // developer.log(like_user_ids.toString(),name:"liked_user_ids");
                 //developer.log(cUser.uid,name:"liked_user_id");
 
                 bool islike=like_user_ids.contains(cUser.uid);
-                developer.log(islike.toString(),name:"isLiked");
+             //   developer.log(islike.toString(),name:"isLiked");
                 return BlogTile(
                 authorname: mpdata["authorName"],
                 imgUrl: mpdata["imgUrl"],
@@ -60,9 +59,8 @@ class _HomePageState extends State<HomePage> {
                 description: mpdata["desc"],
                 time: mpdata["time"],
                 documentId: mpdata["documentId"],
-                issaved: (cUser.saved_blogs).contains(mpdata["documentId"]),
+                issaved: (cUser.savedBlogs).contains(mpdata["documentId"]),
                 likecount: mpdata["likes_count"],
-
                 isliked: islike,
                 );
               },
@@ -77,18 +75,22 @@ class _HomePageState extends State<HomePage> {
   @override
   initState()  {
     super.initState();
-    CrudMethods.getAllData().then((result) {
-      setState(() {
-        blogsStream = result;
-      });
-    });
+    filldata();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[100],
+      extendBody:true,
+      extendBodyBehindAppBar: true,
       drawer: NavDrawer(),
       appBar: AppBar(
+
+
+        actions: <Widget>[
+          dropdown(),
+        ],
         backgroundColor: Colors.teal,
         title: Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
           Text(
@@ -98,49 +100,84 @@ class _HomePageState extends State<HomePage> {
           Text(
             "loggie",
             style: TextStyle(fontSize: 25, color: Colors.blue[50]),
-          ),],),
-
-        // actions:<Widget>[
-        //   Switch(
-        //     activeColor: Colors.blue,
-        //     inactiveTrackColor: Colors.grey,
-        //     inactiveThumbColor: Colors.grey,
-        //     value: cColors.darkmode,
-        //     onChanged: (bool value) {
-        //       setState(() {
-        //         print('Switch button: ' + value.toString());
-        //         cColors.darkmode=value;
-        //         main();
-        //       });
-        //     }
-        // ),],
+          ),
+        ],
+        ),
 
       ),
-      body: ListView(
-        children:[
-            SizedBox(height: 50),
-            blogsStream!=null?blogsList(): Container(),
+      body:blogsStream!=null?blogsList(): Container(),
 
-        ]),
+
       floatingActionButton: Container(
         //padding: EdgeInsets.symmetric(vertical: 15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            FloatingActionButton.extended(
+            FloatingActionButton(
+              child: const Icon(Icons.add,semanticLabel:"add",size:30,color: Colors.black,),
 
-              backgroundColor: Colors.yellow[600],
+              backgroundColor: Colors.red[400],
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => CreateBlog()));
               },
-              icon: Icon(Icons.add),
-              label: Text("Add Post"),
+             // icon: Icon(Icons.add),
             ),
 
           ],
         ),
       ),
     );
+  }
+  Widget dropdown(){
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+      Container(
+  padding: EdgeInsets.symmetric(horizontal: 5.0),
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(5.0),
+    border: Border.all(
+    color: Colors.indigo, style: BorderStyle.solid, width: 2),
+    ),
+        child: DropdownButton(
+          isDense:true,
+          hint: _dropDownValue == null
+              ? Text('Sort By')
+              : Text(
+            _dropDownValue,
+            style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+          ),
+         // isExpanded: true,
+          iconSize: 30.0,
+          style: TextStyle(color: Colors.black),
+          items: ['time', 'likes_count'].map(
+                (val) {
+              return DropdownMenuItem<String>(
+                value: val,
+                child: Text(val, style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+              );
+            },
+          ).toList(),
+          onChanged: (val) {
+            filldata(value:val);
+            setState(
+                  () {
+                    _dropDownValue = val;
+              },
+            );
+          },
+        ),
+      ),
+    ],
+  );
+  }
+ void filldata({value:'time'}){
+  CrudMethods.getAllData(value).then((result) {
+    print("refreshed");
+    setState(() {
+      blogsStream = result;
+    });
+});
   }
 }

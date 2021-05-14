@@ -46,14 +46,15 @@ class AuthService {
       'photoURL': user.photoURL,
       'displayName': user.displayName,
       'registeredDate': DateTime.now(),
-      'saved_blogs':[],
+      'savedBlogs':[],
       'blogs':[],
-
+      'following':[],
     });
     print('user created');
   }
 
   static init() async {
+    if(cUser.ready){return true;}
 
     cUser.userRef = _db.collection('users').doc((await FirebaseAuth.instance.currentUser).uid);
 
@@ -61,16 +62,17 @@ class AuthService {
     if(ds.exists){
       print("exists");
     cUser.email=ds.get('email');
-    cUser.registered_date=ds.get('registeredDate');
+    cUser.registeredDate=ds.get('registeredDate');
     cUser.displayName=ds.get('displayName');
     cUser.photoURL=ds.get('photoURL');
     cUser.uid=ds.get('uid');
     cUser.blogs=ds.get('blogs');
-    cUser.saved_blogs=ds.get('saved_blogs');
+    cUser.following=ds.get('following');
+    cUser.savedBlogs=ds.get('savedBlogs');
     cUser.ready=true;
     }
     //cUser.blogCollection=FirebaseFirestore.instance.collection('blogs');
-    print(cUser.saved_blogs);
+    //print(cUser.savedBlogs);
 
     print("user details initiated");
     return true;
@@ -80,6 +82,7 @@ class AuthService {
   void signOut() {
     _auth.signOut();
     _googleSignIn.signOut();
+    cUser.ready=false;
   }
 }
 

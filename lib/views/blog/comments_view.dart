@@ -1,7 +1,9 @@
+import 'package:bloggie/views/profile/user_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bloggie/services/comments.dart';
+import 'package:bloggie/services/static_components.dart';
 
 class CommentsView extends StatefulWidget {
 
@@ -46,9 +48,12 @@ class _CommentsViewState extends State<CommentsView> {
                     DocumentSnapshot ds = snapshot.data.docs[index];
                     Map mpdata=ds.data() as Map;
                     return commentTile(
+                      mpdata["uid"],
+                      mpdata['blogId'],
                       mpdata["authorname"],
                       mpdata["comment"],
                       mpdata["datetime"],
+                      mpdata['commentId']
                     );
                   },
                 ),
@@ -74,12 +79,16 @@ class _CommentsViewState extends State<CommentsView> {
 }
 
 class commentTile extends StatefulWidget {
-  String authorname,datetime,comment;
+  String authorname,comment,uid,commentId,blogId;
+  var datetime;
 
   commentTile(
+      @required this.uid,
+      @required this.blogId,
       @required this.authorname,
       @required this.comment,
       @required this.datetime,
+      @required this.commentId,
       );
 
   @override
@@ -110,7 +119,7 @@ class _commentTileState extends State<commentTile> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
               // color: Colors.red,
-              child: Text(widget.datetime,
+              child: Text(widget.datetime.toDate().toString().substring(0,16),
                   style: TextStyle(
                     color: Colors.blue[600],
                     fontSize: 12,
@@ -132,18 +141,48 @@ class _commentTileState extends State<commentTile> {
             ],
           ),
           // ),
-          Align(
+          widget.uid==cUser.uid?Align(
             alignment: Alignment.centerRight,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+            child: GestureDetector(
+              onTap:(){comments.deleteComment(widget.blogId,widget.commentId).then((_){
+              String message="Comment deleted";
+                SnackBar snackBar = SnackBar(content: Text(message),duration: Duration(seconds: 1),);
+                Scaffold.of(context).showSnackBar(snackBar);
+                print(message);
+              });},
+                child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
               // color: Colors.red,
-              child: Text("@" + widget.authorname,
+              child: Text("Delete",
                   style: TextStyle(
-                    color: Colors.blue[600],
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red,
                     fontSize: 12,
-                  )),
-            ),
+                  )
+              )
           ),
+            ),
+          ):Container(),
+          widget.uid!=cUser.uid?Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap:(){
+                print("to user profile page");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserProfile(widget.uid)));
+                },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                // color: Colors.red,
+                child: Text("@" + widget.authorname,
+                    style: TextStyle(
+                      color: Colors.blue[600],
+                      fontSize: 12,
+                    )
+                )
+              ),
+            )
+          ):Container(),
 
 
         ],

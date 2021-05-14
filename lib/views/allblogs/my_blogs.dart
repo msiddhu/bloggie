@@ -52,7 +52,7 @@ class _MyBlogsState extends State<MyBlogs> with AutomaticKeepAliveClientMixin{
          description: mpdata["desc"],
          time: mpdata["time"],
          documentId: mpdata["documentId"],
-         issaved: (cUser.saved_blogs).contains(mpdata["documentId"]),
+         issaved: (cUser.savedBlogs).contains(mpdata["documentId"]),
          likecount: mpdata["likes_count"],
          isliked: islike,
        );

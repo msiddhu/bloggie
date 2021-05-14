@@ -17,9 +17,9 @@ class _SavedBlogsState extends State<SavedBlogs> with AutomaticKeepAliveClientMi
   List blogsmp;
   @override
   void initState() {
-    print(cUser.saved_blogs);
+    print(cUser.savedBlogs);
     print(cUser.photoURL);
-    blogslist=cUser.saved_blogs;
+    blogslist=cUser.savedBlogs;
     print('saved blogslist'+blogslist.toString());
     filldata(blogslist);
 
@@ -56,7 +56,7 @@ class _SavedBlogsState extends State<SavedBlogs> with AutomaticKeepAliveClientMi
             description: mpdata["desc"],
             time: mpdata["time"],
             documentId: mpdata["documentId"],
-            issaved: (cUser.saved_blogs).contains(mpdata["documentId"]),
+            issaved: (cUser.savedBlogs).contains(mpdata["documentId"]),
            // likecount: mpdata["likes_count"],
             likecount: 0,
             isliked: islike,

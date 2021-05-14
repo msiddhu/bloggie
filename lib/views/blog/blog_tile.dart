@@ -1,6 +1,6 @@
 import 'package:bloggie/services/like.dart';
 import 'package:bloggie/services/save.dart';
-import 'package:bloggie/views/blog/blog_view_page.dart';
+import 'package:bloggie/views/blog/blog_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,14 +49,16 @@ class _BlogTileState extends State<BlogTile> {
         );
       },
       child: Container(
+
         padding: EdgeInsets.symmetric(horizontal: 5),
         margin: EdgeInsets.only(bottom: 12.5),
         width: MediaQuery.of(context).size.width,
         child: Card(
+          elevation: 10.0,
           //color: Colors.grey,
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.blueGrey, width: 2.5),
-            borderRadius: BorderRadius.circular(15.0),
+            //side: BorderSide(color: Colors.blueGrey, width: 5),
+            borderRadius: BorderRadius.circular(30.0),
           ),
 
           child: Column(
@@ -97,7 +99,7 @@ class _BlogTileState extends State<BlogTile> {
                     height: descheight,
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      //borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
                           imageUrl: widget.imgUrl,
                           placeholder: (context, url) => Container(
@@ -115,7 +117,8 @@ class _BlogTileState extends State<BlogTile> {
                     height: descheight,
                     decoration: BoxDecoration(
                         color: Colors.black54.withOpacity(0.4),
-                        borderRadius: BorderRadius.circular(10)),
+                       // borderRadius: BorderRadius.circular(10)
+                    ),
                   ),
                   Container(
                       height: descheight * (2 / 3),
@@ -149,9 +152,9 @@ class _BlogTileState extends State<BlogTile> {
 
                 child:widget.authorname==cUser.displayName?Container(height:30,child:Text("Created at : "+widget.time.toDate().toString().substring(0,16))):
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    RaisedButton.icon(
+                    RaisedButton(
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(25.0),
                       ),
@@ -165,17 +168,17 @@ class _BlogTileState extends State<BlogTile> {
                         print(widget.isliked);
 
                       },
-                      icon: Icon(Icons.favorite,
-                        color:  widget.isliked ? Colors.red:Colors.grey,
+                      child: Icon(widget.isliked?Icons.favorite:Icons.favorite_border,
+                        color: Colors.red,
                       ),
-                      label: Text(''),
+                     // label: Text(''),
                       splashColor: Colors.red,
                     ),
 
 
                     Divider(),
 
-                    RaisedButton.icon(
+                    RaisedButton(
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(25.0),
                       ),
@@ -188,30 +191,30 @@ class _BlogTileState extends State<BlogTile> {
                                     detailblog(documentId: widget.documentId))
                         );
                       },
-                      icon: Icon(Icons.add_comment,
-                        color: Colors.green,
+                      child: Icon(Icons.add_comment_outlined,
+                        color: Colors.green[500],
                       ),
-                      label: Text('Comment'),
+                      //label: Text(''),
                       splashColor: Colors.lightGreen,
                     ),
 
 
                     Divider(),
 
-                    RaisedButton.icon(
+                    RaisedButton(
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(25.0),
                       ),
 
                       color: widget.issaved ?Colors.lime[50]: Colors.grey[50],
                       onPressed: () async {
-                        print(cUser.saved_blogs);
+                        print(cUser.savedBlogs);
                         await widget.issaved ? unsaveblog(widget.documentId):saveblog(widget.documentId);
                         setState(() => widget.issaved = !widget.issaved);
                       },
 
-                      icon: widget.issaved?Icon(Icons.bookmark,color: Colors.lime,):Icon(Icons.bookmark_border,),
-                      label: widget.issaved?Text('Saved'):Text('Save'),
+                      child: widget.issaved?Icon(Icons.bookmark,color: Colors.lime,):Icon(Icons.bookmark_border,),
+                      //label: widget.issaved?Text('Saved'):Text('Save'),
                       splashColor: Colors.lime,
                     ),
                   ],

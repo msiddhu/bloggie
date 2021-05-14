@@ -16,7 +16,9 @@ class InfoPage extends StatelessWidget {
       Text(
         "Page",
         style: TextStyle(fontSize: 25, color: Colors.white),
-      ),],),
+      ),
+    ],
+    ),
 
 
     ),
