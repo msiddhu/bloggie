@@ -10,7 +10,7 @@ edit delete is uid not display name
  --dark mode
  -- delete account
 
-4 routingn
+4 routing
 
 5 animations(transitions)
 
