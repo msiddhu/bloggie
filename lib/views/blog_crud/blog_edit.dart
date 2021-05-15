@@ -95,7 +95,35 @@ class _EditBlogState extends State<EditBlog> {
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         ]),
-        actions: <Widget>[],
+    actions: [
+  Container(
+    padding: EdgeInsets.all(10),
+    child: FloatingActionButton.extended(
+    backgroundColor: Colors.green,
+    splashColor: Colors.yellow[800],
+    focusColor: Colors.red,
+    // shape: RoundedRectangleBorder(
+    //     borderRadius: BorderRadius.circular(14.0),
+    //     side: BorderSide(color: Colors.blue[900])),
+    onPressed: () {
+      if(desc_controller.text!=null&&title_controller.text!=null)
+      {
+        print("yes checked blog");
+        updateBlog();
+      }
+      else
+      {
+        showAlertDialog(context,"Fill all the fields \n(Title and Description)").showDialog();
+      }
+      // showAlertDialog(context).showDialog();
+
+    },
+    label: Text(
+      'Save',
+      style: TextStyle(fontSize: 18),
+    ),
+),
+  ),],
       ),
         body: _isLoading
             ? Container(
@@ -184,31 +212,31 @@ class _EditBlogState extends State<EditBlog> {
               ),
             )
         ),
-      floatingActionButton: FloatingActionButton.extended(
-
-        splashColor: Colors.yellow[800],
-        focusColor: Colors.red,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14.0),
-            side: BorderSide(color: Colors.blue[900])),
-        onPressed: () {
-          if(desc_controller.text!=null&&title_controller.text!=null)
-          {
-            print("yes checked blog");
-            updateBlog();
-          }
-          else
-            {
-            showAlertDialog(context,"Fill all the fields \n(Title and Description)").showDialog();
-          }
-          // showAlertDialog(context).showDialog();
-
-        },
-        label: Text(
-          'Save',
-          style: TextStyle(fontSize: 18),
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   backgroundColor: Colors.green,
+      //   splashColor: Colors.yellow[800],
+      //   focusColor: Colors.red,
+      //   // shape: RoundedRectangleBorder(
+      //   //     borderRadius: BorderRadius.circular(14.0),
+      //   //     side: BorderSide(color: Colors.blue[900])),
+      //   onPressed: () {
+      //     if(desc_controller.text!=null&&title_controller.text!=null)
+      //     {
+      //       print("yes checked blog");
+      //       updateBlog();
+      //     }
+      //     else
+      //       {
+      //       showAlertDialog(context,"Fill all the fields \n(Title and Description)").showDialog();
+      //     }
+      //     // showAlertDialog(context).showDialog();
+      //
+      //   },
+      //   label: Text(
+      //     'Save',
+      //     style: TextStyle(fontSize: 18),
+      //   ),
+      // ),
 
     );
   }
@@ -244,54 +272,15 @@ print(map);
       print("is is done");
       //showSnackBar();
 
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => detailblog(documentId: widget.blog_id))
-      );
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => detailblog(documentId: widget.blog_id))
+      // );
+      Navigator.pop(context,true);
     });
   }
 
-
-
-  // Future<bool> uploadBlog() async {
-  //   var downloadUrl;
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //   if (_image != null) {
-  //     Reference firebaseStorageRef = FirebaseStorage.instance
-  //         .ref()
-  //         .child("bloggieimages")
-  //         .child("${randomAlphaNumeric(10)}.jpg");
-  //
-  //     final UploadTask taskSnapshot = firebaseStorageRef.putFile(_image);
-  //     downloadUrl = await (await taskSnapshot).ref.getDownloadURL();
-  //   }
-  //
-  //   else {
-  //     downloadUrl=cUser.photoURL;
-  //   }
-  //   print("this is the downloadURL" + downloadUrl);
-  //   Map<String, dynamic> blogMap = {
-  //     "imgUrl": downloadUrl,
-  //     "authorName": cUser.displayName,
-  //     "title": title,
-  //     "desc": desc,
-  //     "liked_user_ids":[],
-  //     "time":DateTime.now().toString(),
-  //     "likes_count":0,
-  //     "commentIDs":[],
-  //   };
-  //   print(blogMap);
-  //   CrudMethods.addData(blogMap).then((result) {
-  //
-  //     _isLoading=false;
-  //     //showSnackBar();
-  //     Navigator.pop(context);
-  //
-  //   });
-  // }
 
   showAlertDialog(BuildContext context,String message) {
 

@@ -61,7 +61,7 @@ class _BlogTabBarState extends State<BlogTabBar> {
                 iconMargin: EdgeInsets.only(bottom: 10.0),
               ),
               Tab(
-                text: 'Friends',
+                text: 'Following',
                 icon: Icon(
                   Icons.wine_bar_rounded,
                   color: Colors.white,

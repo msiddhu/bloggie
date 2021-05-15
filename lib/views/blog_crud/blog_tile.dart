@@ -1,5 +1,7 @@
+import 'package:bloggie/services/crud.dart';
 import 'package:bloggie/services/like.dart';
 import 'package:bloggie/services/save.dart';
+import 'package:bloggie/views/blog_crud/blog_edit.dart';
 import 'package:bloggie/views/blog_crud/blog_view.dart';
 import 'package:bloggie/views/profile/user_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -34,11 +36,9 @@ class BlogTile extends StatefulWidget {
 
 class _BlogTileState extends State<BlogTile> {
   var iconsize = 25.0;
-
   var boxheight = 10.0;
   String like;
   var descheight = 225.0;
-
   @override
   Widget build(BuildContext context) {
     like=(widget.likecount==1)?" like":" likes";
@@ -78,7 +78,42 @@ class _BlogTileState extends State<BlogTile> {
               SizedBox(
                 height: boxheight / 10,
               ),
-              Align(
+              widget.uid==cUser.uid?
+              Container(
+                child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children:[
+                     // SizedBox(width: 20,),
+                      RaisedButton(onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => EditBlog(blog_id:widget.documentId)));
+
+                      },
+                          color:Colors.green[400],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                             // side: BorderSide(color: Colors.green,width: 2.5)
+                          ),
+                          elevation: 5.0,
+
+                          child:Text("Edit")),
+                  //    new Spacer(),
+                      RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                             // side: BorderSide(color: Colors.red,width: 2.5)
+                          ),
+                          elevation: 5.0,
+                          color:Colors.red[400],
+                          onPressed: () {
+                            CrudMethods.deleteData(widget.documentId);
+                            Navigator.pop(context);
+
+                          },child:Text("Delete",style: TextStyle(color: Colors.white),)),
+
+                    ]
+                )
+              ) :Align(
                 alignment: Alignment.centerRight,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
@@ -159,7 +194,7 @@ class _BlogTileState extends State<BlogTile> {
 
               Container(
 
-                child:widget.authorname==cUser.displayName?Container(height:30,child:Text("Created at : "+widget.time.toDate().toString().substring(0,16))):
+                child:widget.uid==cUser.uid?Container(height:30,child:Text("Created at : "+widget.time.toDate().toString().substring(0,16))):
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[

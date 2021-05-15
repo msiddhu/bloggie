@@ -2,6 +2,7 @@ import 'package:bloggie/services/comments.dart';
 import 'package:bloggie/services/crud.dart';
 import 'package:bloggie/services/like.dart';
 import 'package:bloggie/services/save.dart';
+import 'package:bloggie/utils/custom_widgets.dart';
 import 'package:bloggie/utils/static_components.dart';
 import 'package:bloggie/views/blog_crud/blog_edit.dart';
 import 'package:bloggie/views/profile/user_profile.dart';
@@ -42,7 +43,7 @@ class _detailblogState extends State<detailblog> {
   @override
   Widget build(BuildContext context) {
 
-    return data==null?Container():Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title:
         Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
@@ -58,13 +59,17 @@ class _detailblogState extends State<detailblog> {
         ),
         actions: <Widget>[],
       ),
-      body: data==null?Container():
+      body: data==null?CircleProgressBox():
       Container(
         // margin:EdgeInsets.symmetric(horizontal: 5),
+        //padding:EdgeInsets.all(5),
         margin:EdgeInsets.all(5),
 
         //padding: EdgeInsets.symmetric(horizontal: 10),
-        decoration:BoxDecoration( border:Border.all(color: Colors.indigo,width: 2),borderRadius: BorderRadius.circular(15.0)),
+        decoration:BoxDecoration(
+            border:Border.all(color: Colors.indigo,width: 2.5),
+        //  borderRadius: BorderRadius
+        ),
         child: ListView(
             children:<Widget>[
               BlogViewTile(
@@ -83,6 +88,7 @@ class _detailblogState extends State<detailblog> {
               WriteComment(documentId:widget.documentId),
               SizedBox(height: 10,),
               CommentsView(documentId:widget.documentId),
+              SizedBox(height: 30,),
             ]
 
         ),
@@ -112,12 +118,18 @@ class WriteComment extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
+              textCapitalization: TextCapitalization.sentences,
+           //   maxLength: 250,
               controller: txt,
               decoration: InputDecoration(
+                border: new OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(
+                    const Radius.circular(10.0),),),
+
                 hintText: 'Write Comment',
                 labelText: 'Comment',
-                border: new OutlineInputBorder(
-                    borderSide: new BorderSide(color: Colors.teal)),
+                // border: new OutlineInputBorder(
+                //     borderSide: new BorderSide(color: Colors.teal)),
 
               ),
             ),
@@ -229,7 +241,11 @@ class _BlogViewTileState extends State<BlogViewTile> {
   Widget build(BuildContext context) {
     like=(widget.likecount==1)?" like":" likes";
     return Container(
+     //  decoration:BoxDecoration(
+     //      border:Border.all(color: Colors.indigo,width: 2),
+     //      borderRadius: BorderRadius.circular(15.0)),
       child: Card(
+       elevation: 3,
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -247,33 +263,36 @@ class _BlogViewTileState extends State<BlogViewTile> {
               Row(
                   children:[
                     SizedBox(width: 20,),
-                    RaisedButton(onPressed: () {
-                      Navigator.pushReplacement(context,
+                    RaisedButton(onPressed: () async {
+                     bool refresh=await Navigator.push(context,
                           MaterialPageRoute(builder: (context) => EditBlog(blog_id:widget.documentId)));
+                     if(refresh){
+                       Navigator.pop(context);
+                     }
 
 
                     },
-                        color:Colors.greenAccent[100],
+                        color:Colors.green[400],
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.green,width: 2.5)
+                         //   side: BorderSide(color: Colors.green,width: 2.5)
                         ),
                         elevation: 5.0,
 
-                        child:Text("edit")),
+                        child:Text("Edit")),
                     new Spacer(),
                     RaisedButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.red,width: 2.5)
+                          //  side: BorderSide(color: Colors.red,width: 2.5)
                         ),
                         elevation: 5.0,
-                        color:Colors.pink[300],
+                        color:Colors.red[400],
                         onPressed: () {
                           CrudMethods.deleteData(widget.documentId);
                           Navigator.pop(context);
 
-                        },child:Text("delete",style: TextStyle(color: Colors.white),)),
+                        },child:Text("Delete",style: TextStyle(color: Colors.white),)),
                     SizedBox(width: 20,),
                   ]
               ):
@@ -322,7 +341,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
                         placeholder: (context, url) =>
                             Container(
                               alignment: Alignment.center,
-                              child: CircularProgressIndicator(),
+                              child: CircleProgress(),
                             ),
                         errorWidget: (context, url, error) =>
                             Icon(Icons.error),
@@ -333,6 +352,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
                   height: boxheight*3/2,
                 ),
                 Container(
+                  padding: EdgeInsets.fromLTRB(20,5, 20, 2),
                   width: MediaQuery
                       .of(context)
                       .size
@@ -343,7 +363,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
                         color: Colors.grey[900],
                         fontSize: 17,
                       ),
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.justify,
                       maxLines: 10),
                 ),
               ],

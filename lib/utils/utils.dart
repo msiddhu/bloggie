@@ -24,12 +24,32 @@ unfollowuser(String follow_uid) async{
 }
 
 
-getuserblogs(uid)async{
+Future<List> getuserblogs(uid)  async{
 DocumentSnapshot ds=await FirebaseFirestore.instance.collection('users').doc(uid).get();
 List userblogs=(ds.data() as Map)['blogs'];
 print(userblogs);
 return userblogs;
 }
+
+
+Future<int> getlikescountofuser(uid)async{
+  List userblogs=await getuserblogs(uid);
+  int count=0;
+  for(int i=0;i<userblogs.length;i++) {
+    var ds = await cUser.blogCollection.doc(userblogs[i]).get();
+    Map mp=ds.data() as Map;
+    count=count+mp['likes_count'];
+  }
+  return count;
+}
+
+
+Future<int> getblogscount(uid) async {
+  List userblogs=await getuserblogs(uid);
+  return userblogs.length;
+}
+
+
 class Utils{
 
 }

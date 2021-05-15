@@ -27,7 +27,9 @@ class _CreateBlogState extends State<CreateBlog> {
 
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.getImage(
+        source: ImageSource.gallery,
+        imageQuality:60);
 
     setState(() {
       if (pickedFile != null) {
@@ -53,7 +55,31 @@ class _CreateBlogState extends State<CreateBlog> {
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         ]),
-        actions: <Widget>[],
+        actions: <Widget>[
+          Container(
+            padding: EdgeInsets.all(10),
+            child: FloatingActionButton.extended(
+              backgroundColor: Colors.yellow[800],
+              splashColor: Colors.yellow[800],
+              focusColor: Colors.red,
+              onPressed: () {
+                if(title!=null&&desc!=null){
+                  print("yes checked blog");
+                  uploadBlog();
+                }
+                else{
+                  showAlertDialog(context,"Fill all the fields \n(Title and Description)").showDialog();
+                }
+                // showAlertDialog(context).showDialog();
+
+              },
+              label: Text(
+                'Post',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          ),
+        ],
       ),
 
       body: _isLoading
@@ -72,6 +98,8 @@ class _CreateBlogState extends State<CreateBlog> {
                 ),
                 Container(
                     child: TextField(
+                      enableSuggestions: true,
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
                         focusColor: Colors.green,
                         hintText: "Title of blog",
@@ -90,6 +118,8 @@ class _CreateBlogState extends State<CreateBlog> {
                   height: 30,
                 ),
                 TextField(
+                  //expands: true,
+                  textCapitalization: TextCapitalization.sentences,
                   decoration: InputDecoration(
                       focusColor: Colors.red,
                       hintText: "Write the description",
@@ -97,12 +127,12 @@ class _CreateBlogState extends State<CreateBlog> {
                       border: OutlineInputBorder(),
                       labelText: "Description",
                       labelStyle: TextStyle(
-                          letterSpacing: 0.5, fontStyle: FontStyle.italic)),
+                          letterSpacing: 1, fontStyle: FontStyle.italic)),
                   autocorrect: true,
                   keyboardType: TextInputType.multiline,
-                  maxLines: 15,
-                  minLines: 5,
-                  maxLength: 250,
+                  maxLines:20,
+                 minLines: 5,
+                  maxLength: 600,
                   onChanged: (val) {
                     desc = val;
                   },
@@ -121,11 +151,12 @@ class _CreateBlogState extends State<CreateBlog> {
                           borderRadius: BorderRadius.circular(15),
                           child: Image.file(_image, fit: BoxFit.cover)))
                       : RaisedButton(
+                    color: Colors.teal[200],
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        side: BorderSide(color: Colors.blue[900])),
+                        borderRadius: BorderRadius.circular(20.0),
+                        side: BorderSide(color: Colors.blue[900],width:2.0),),
                     elevation: 10,
-                    child: Text("upload picture "),
+                    child: Text("Upload Picture "),
                     onPressed: () {
                       getImage();
                     },
@@ -134,29 +165,6 @@ class _CreateBlogState extends State<CreateBlog> {
               ],
             ),
           )
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-
-        splashColor: Colors.yellow[800],
-        focusColor: Colors.red,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14.0),
-            side: BorderSide(color: Colors.blue[900])),
-        onPressed: () {
-          if(title!=null&&desc!=null){
-            print("yes checked blog");
-            uploadBlog();
-          }
-          else{
-            showAlertDialog(context,"Fill all the fields \n(Title and Description)").showDialog();
-          }
-          // showAlertDialog(context).showDialog();
-
-        },
-        label: Text(
-          'Post',
-          style: TextStyle(fontSize: 18),
-        ),
       ),
     );
   }

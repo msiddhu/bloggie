@@ -121,7 +121,7 @@ class _commentTileState extends State<commentTile> {
               // color: Colors.red,
               child: Text(widget.datetime.toDate().toString().substring(0,16),
                   style: TextStyle(
-                    color: Colors.blue[600],
+                    color: Colors.black,
                     fontSize: 12,
                   )),
             ),
@@ -174,8 +174,9 @@ class _commentTileState extends State<commentTile> {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 // color: Colors.red,
-                child: Text("@" + widget.authorname,
+                child: Text(widget.authorname,
                     style: TextStyle(
+                    decoration: TextDecoration.underline,
                       color: Colors.blue[600],
                       fontSize: 12,
                     )

@@ -24,7 +24,6 @@ class _UserProfileState extends State<UserProfile> {
     getuserdetails(widget.uid).then((value){
       mp=value;
       setState(() {
-        print("yes flag");
       flag=true;
     });
     });

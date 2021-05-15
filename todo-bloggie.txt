@@ -1,10 +1,17 @@
+Awesome font integration
+
+dispose error
+
 1. Extendible blogtile with minmum height and max put 2000 letter limit to desc
+
+3 leave feed back
+About 
 
 2 stats
 --total number of like
 -- total number of blogs written
 
-3 unified colors
+3 unified colors,date
 
 4 Settings
  --dark mode
@@ -13,6 +20,7 @@
 5 routing
 
 6 animations(transitions)
+url_launcher for linking the GitHub 
 
 7 Searchbar
 
@@ -21,3 +29,4 @@
 9 anonymous user
 
 10 website ios
+ Share feature

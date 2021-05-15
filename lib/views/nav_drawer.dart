@@ -27,7 +27,7 @@ class NavDrawer extends StatelessWidget {
             currentAccountPicture: CircleAvatar(child:Image.network(cUser.photoURL)),
               decoration: BoxDecoration(
                   //color: Colors.indigo,
-                  gradient: LinearGradient(colors: [Colors.blue[900],Colors.lightBlueAccent])),
+                  gradient: LinearGradient(colors: [Colors.black,Colors.blue])),
               //backgroundColor:Colors.amber,
 
           ),
@@ -85,8 +85,13 @@ class NavDrawer extends StatelessWidget {
               children: [
                 Image.asset('assets/blogIcon.png',height: 96,width: 96,),
                 Text("Bloggie",textAlign:TextAlign.center,style: TextStyle(fontSize: 24,fontWeight:FontWeight.bold,color:Colors.blue[900]),),
+                Text("About",style:TextStyle(decoration: TextDecoration.underline,color:Colors.blue),),
+                GestureDetector(
+                    child: Text("Contact us",
+                      style:TextStyle(
+                          decoration: TextDecoration.underline,color:Colors.blue),))
 
-    ],
+              ],
             ),
           ),
 
