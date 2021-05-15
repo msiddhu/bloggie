@@ -5,13 +5,10 @@ dispose error
 1. Extendible blogtile with minmum height and max put 2000 letter limit to desc
 
 3 leave feed back
-About 
-
-2 stats
---total number of like
--- total number of blogs written
+About
 
 3 unified colors,date
+
 
 4 Settings
  --dark mode
