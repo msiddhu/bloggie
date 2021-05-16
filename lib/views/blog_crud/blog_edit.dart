@@ -71,15 +71,6 @@ class _EditBlogState extends State<EditBlog> {
   }
 
 
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is removed from the
-    // widget tree.
-    title_controller.dispose();
-    desc_controller.dispose();
-    super.dispose();
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
