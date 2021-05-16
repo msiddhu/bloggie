@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'allblogs/tab_bar.dart';
+import 'contact_us.dart';
 import 'info_page.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -22,12 +22,12 @@ class NavDrawer extends StatelessWidget {
         children: <Widget>[
           new UserAccountsDrawerHeader(
 
-            accountName:Text(cUser.displayName),
-            accountEmail: Text(cUser.email),
+            accountName:Text(cUser.displayName,style: TextStyle(color: Theme.of(context).textTheme.headline6.color),),
+            accountEmail: Text(cUser.email,style: TextStyle(color: Theme.of(context).textTheme.headline6.color)),
             currentAccountPicture: CircleAvatar(child:Image.network(cUser.photoURL)),
               decoration: BoxDecoration(
                   //color: Colors.indigo,
-                  gradient: LinearGradient(colors: [Colors.black,Colors.blue])),
+                  gradient: LinearGradient(colors: [Theme.of(context).scaffoldBackgroundColor,Colors.blue])),
               //backgroundColor:Colors.amber,
 
           ),
@@ -39,15 +39,7 @@ class NavDrawer extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => profilePage())),
             },
           ),
-          Divider(),
-          ListTile(
-            title: new Text("My Blogs"),
-            trailing: new Icon(Icons.auto_stories,color:Colors.pink),
-            onTap: () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BlogTabBar())),
-            },
-          ),
+
 
           Divider(),
 
@@ -57,6 +49,15 @@ class NavDrawer extends StatelessWidget {
             onTap: () => {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => settings())),
+            },
+          ),
+          Divider(),
+          ListTile(
+            title: new Text("Contact Us"),
+            trailing: new Icon(Icons.auto_stories,color:Colors.pink),
+            onTap: () => {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => contactUs())),
             },
           ),
           Divider(),
@@ -84,12 +85,15 @@ class NavDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Image.asset('assets/blogIcon.png',height: 96,width: 96,),
+
                 Text("Bloggie",textAlign:TextAlign.center,style: TextStyle(fontSize: 24,fontWeight:FontWeight.bold,color:Colors.blue[900]),),
+
                 Text("About",style:TextStyle(decoration: TextDecoration.underline,color:Colors.blue),),
-                GestureDetector(
-                    child: Text("Contact us",
-                      style:TextStyle(
-                          decoration: TextDecoration.underline,color:Colors.blue),))
+
+                // GestureDetector(
+                //     child: Text("Contact us",
+                //       style:TextStyle(
+                //           decoration: TextDecoration.underline,color:Colors.blue),))
 
               ],
             ),

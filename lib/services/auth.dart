@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../utils/static_components.dart';
+import '../utils/utils.dart';
+import '../views/login_page.dart';
 
 class AuthService {
   // Dependencies
@@ -76,6 +79,17 @@ class AuthService {
 
     print("user details initiated");
     return true;
+  }
+   void deleteUser() async{
+
+    List userblogs=await getuserblogs(cUser.uid);
+    for( int i=0;i<userblogs.length;i++){
+      cUser.blogCollection.doc(userblogs[i]).delete();
+    }
+    cUser.userRef.delete();
+    User user= _auth.currentUser;
+    await user.delete();
+    signOut();
   }
 
 

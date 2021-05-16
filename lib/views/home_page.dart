@@ -5,6 +5,9 @@ import 'package:bloggie/views/blog_crud/blog_tile.dart';
 import 'package:bloggie/views/nav_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:bloggie/utils/color_components.dart';
+
+import '../main.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -76,23 +79,50 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Color textcolor=Theme.of(context).textTheme.headline6.color;
     return Scaffold(
-      backgroundColor: Colors.blue[100],
+     // backgroundColor: Colors.blue[100],
       extendBody:true,
       extendBodyBehindAppBar: true,
       drawer: NavDrawer(),
       appBar: AppBar(
         actions: <Widget>[
+          Container(
+            padding:EdgeInsets.all(10),
+            //height: 20,
+            child: Column(
+              children: [
+                SizedBox(
+                  height:15,
+                  child: Switch(
+                      activeColor: Colors.blue[900],
+                      inactiveTrackColor: Colors.blue[200],
+                      inactiveThumbColor: Colors.grey,
+                      value: cColors.darkmode,
+
+                      onChanged: (bool value) {
+                        setState(() {
+                          print('Switch button: ' + value.toString());
+                          cColors.darkmode=value;
+                          main();
+                        });
+                      }
+                  ),
+                ),
+                SizedBox(height: 8,),
+                Text("Dark mode",style:TextStyle(fontSize: 10,color:Theme.of(context).textTheme.headline1.color)),
+              ],
+            ),
+          )
         ],
-        backgroundColor: Colors.teal,
         title: Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
           Text(
             "B",
-            style: TextStyle(fontSize: 40, color: Colors.blue[900]),
+            style: TextStyle(fontSize: 40, color:Theme.of(context).appBarTheme.textTheme.headline1.color),
           ),
           Text(
             "loggie",
-            style: TextStyle(fontSize: 25, color: Colors.blue[50]),
+            style: TextStyle(fontSize: 25,  color:Theme.of(context).appBarTheme.textTheme.headline6.color),
           ),
         ],
         ),
@@ -134,13 +164,13 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18.0),
                 border: Border.all(
-                    color: Colors.black54, style: BorderStyle.solid, width: 2
+                    color:Colors.black, style: BorderStyle.solid, width: 2
                 ),
               ),
                 child: Row(
                   children: [
                     SizedBox(width:10),
-                    Text("Sort by  "),
+                    Text("Sort by  ",style:TextStyle(color:Theme.of(context).textTheme.headline1.color)),
                     Container(
           padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
 
@@ -150,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                             ? Text('Sort By')
                             : Text(
                           _dropDownValue,
-                          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                          style: TextStyle(color:Theme.of(context).textTheme.headline1.color,fontWeight: FontWeight.bold),
                         ),
                        // isExpanded: true,
                         iconSize: 30.0,
@@ -159,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                               (val) {
                             return DropdownMenuItem<String>(
                               value: val,
-                              child: Text(val, style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                              child: Text(val, style: TextStyle(color:Theme.of(context).textTheme.headline1.color,fontWeight: FontWeight.bold),),
                             );
                           },
                         ).toList(),

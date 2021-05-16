@@ -1,7 +1,9 @@
 import 'package:bloggie/utils/utils.dart';
+import 'package:bloggie/views/profile/stats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bloggie/utils/static_components.dart';
+import 'package:bloggie/utils/color_components.dart';
 
 class Profile extends StatefulWidget {
   Map mpdata;
@@ -24,64 +26,81 @@ class _ProfileState extends State<Profile> {
     String uid=widget.mpdata['uid'];
     var registered_date=widget.mpdata['registeredDate'];
     String follow_text=cUser.following.contains(uid)?"Following":"Follow";
+    Color textcolor=Theme.of(context).textTheme.headline6.color;
     return Container(
-      decoration: BoxDecoration(color:Colors.green[200],boxShadow: [
-        BoxShadow(
-          color: Colors.grey,
-          offset: Offset(0.0, 1.0), //(x,y)
-          blurRadius: 6.0,
-        ),],
+      decoration: BoxDecoration(
+        color:Theme.of(context).errorColor,
       ),
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-
-            SizedBox(height: 30,),
-
-            Row(
+      child: Column(
+        children: [
+          Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(width: 30,),
-                ClipOval(child: Image.network(photoURL)),
-                SizedBox(width:25 ,),
-                Column(
+
+                SizedBox(height: 20,),
+
+                Row(
                   children: [
-                    Text(displayName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
-                    SizedBox(height: 10,),
-                    Text(email,style: TextStyle(fontWeight: FontWeight.bold),),
-                    SizedBox(height: 10,),
-                    cUser.uid!=uid?
-                    ElevatedButton(onPressed: ( ) {
-                      if(follow_text=="Follow"){
-                        followuser(uid).then((_){
-                          setState(() {
-                            follow_text="Unfollow";
-                          }); });}
-                      else{
-                        unfollowuser(uid).then((_){
-                          setState(() {
-                            follow_text="Follow";
+                    SizedBox(width: 20,),
+                    Container(
+                        child: ClipOval(
+                            child: Image.network(photoURL)
+                        ),
+                      decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: new Border.all(
+                        color: cColors.profile_image_border,
+                        width: 3.0,
+                      ),
+                    ),
+                    ),
+                    SizedBox(width:18 ,),
+                    Column(
+                      children: [
+                        Text(displayName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color:textcolor),),
+                        SizedBox(height: 10,),
+                        Text(email,style: TextStyle(fontWeight: FontWeight.w400,color:textcolor),),
+                        SizedBox(height: 8,),
+                        Text("Registered :  "+registered_date.toDate().toString().substring(0,10),
+                          style: TextStyle(fontWeight: FontWeight.w400,color:textcolor)
+                          ,),
+                        cUser.uid!=uid?
+                        ElevatedButton(onPressed: ( ) {
+                          if(follow_text=="Follow"){
+                            followuser(uid).then((_){
+                              setState(() {
+                                follow_text="Unfollow";
+                              }); });}
+                          else{
+                            unfollowuser(uid).then((_){
+                              setState(() {
+                                follow_text="Follow";
+                              }
+                              );
+                            }
+                            );
                           }
-                          );
-                        }
-                        );
-                      }
 
-                    },
-                      child: Text(follow_text),
-                    ):Container(),
+                        },
+                          child: Text(follow_text,style: TextStyle(color:Theme.of(context).scaffoldBackgroundColor),),
+                        ):Container(),
+                        Stats(),
+                      ],
+                    )
+
                   ],
-                )
+                ),
 
+
+
+              SizedBox(height: 10,),
+                //Stats(),
               ],
             ),
-            SizedBox(height: 30,),
+          ),
 
-
-            Text("Registered :  "+registered_date.toDate().toString().substring(0,16),style: TextStyle(fontWeight: FontWeight.bold),),
-          SizedBox(height: 20,),
-          ],
-        ),
+        ],
       ),
     );
   }

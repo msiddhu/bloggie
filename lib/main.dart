@@ -1,6 +1,6 @@
 import 'package:bloggie/utils/connector.dart';
 import 'package:bloggie/services/auth.dart';
-import 'package:bloggie/utils/static_components.dart';
+import 'package:bloggie/utils/color_components.dart';
 
 import 'package:bloggie/views/home_page.dart';
 import 'package:bloggie/views/login_page.dart';
@@ -31,18 +31,13 @@ class MyApp extends StatelessWidget {
   }
 
   ThemeData buildThemeData() {
-
     if(cColors.darkmode){
-      return ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.orange
-      );
+      print("dark theme");
+      return cColors.darktheme;
     }
     else{
-      return ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.blueGrey,
-      );
+      print("light theme");
+      return cColors.lighttheme;
     }
   }
 
@@ -52,9 +47,6 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, snapshot) {
         if (snapshot.hasData) {
           print("homePage");
-          // authService.init();
-          // return HomePage();
-
           return connector();
         }
         else {

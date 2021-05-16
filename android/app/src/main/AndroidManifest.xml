@@ -2,7 +2,7 @@
     package="com.bloggie">
    <application
         android:label="bloggie"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/bloggie_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

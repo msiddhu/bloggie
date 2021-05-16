@@ -10,31 +10,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  // Text blogTitle=Text("Bloggie",textAlign:TextAlign.center,style: TextStyle(fontSize: 40,fontWeight:FontWeight.bold,color:Colors.purple[900],
-  //     shadows: <Shadow>[
-  //     Shadow(
-  // offset: Offset(4.0, 4.0),
-  // blurRadius: 10.0,
-  // color: Color.fromARGB(125, 0, 0, 255),
-  // ),
-  // ],
-  // ),
-  // );
-
-
-  // Container logo =Container(
-  //   decoration: BoxDecoration(
-  //    // color: Colors.white,
-  //     shape: BoxShape.circle,
-  //     boxShadow: [BoxShadow(blurRadius: 10, color: Colors.white60, spreadRadius: 10)],
-  //   ),
-  //   child:CircleAvatar(
-  //     backgroundColor: Colors.blue[900],
-  //     radius: 64.0,
-  //     child: Image.asset('assets/blogIcon.png'),
-  //   ),
-  //
-  // );
 
 
 
@@ -47,17 +22,6 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.blue[200],
-        // gradient: LinearGradient(
-        //   begin: Alignment.center,
-        //  //stops: [0.1, 0.5, 0.7, 0.9],
-        //   colors: [
-        //     Colors.blue[100],
-        //     Colors.lightBlue,
-        //     Colors.blue[800],
-        //
-        //   ],
-        //   tileMode: TileMode.mirror,
-        // ),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,

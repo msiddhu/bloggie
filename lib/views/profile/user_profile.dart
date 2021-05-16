@@ -4,6 +4,8 @@ import 'package:bloggie/views/profile/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/custom_widgets.dart';
+
 class UserProfile extends StatefulWidget {
   String uid;
   UserProfile(
@@ -38,7 +40,7 @@ class _UserProfileState extends State<UserProfile> {
       body:Container(
         child: ListView(
             children:[
-              flag?Profile(mp):Container(child:Text(widget.uid)),
+              flag?Profile(mp):CircleProgressBox(),
               SizedBox(height: 25,),
               flag?AllBlogs(mp['blogs'],true):Container(),
             ]

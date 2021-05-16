@@ -29,34 +29,37 @@ class _AllBlogsState extends State<AllBlogs> with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
     if(widget.neverscroll){
-    return ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: blogslist.length,
-        itemBuilder:(context,index){
-          Map mpdata=blogsmp[index];
-          bool islike=false;
-          if(mpdata!=null){
-          List like_user_ids=mpdata["liked_user_ids"]==null?["nothing"]:mpdata["liked_user_ids"];
-          islike=like_user_ids.contains(cUser.uid);
+    return Container(
+      //decoration: BoxDecoration(color: Colors.blue),
+      child: ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: blogslist.length,
+          itemBuilder:(context,index){
+            Map mpdata=blogsmp[index];
+            bool islike=false;
+            if(mpdata!=null){
+            List like_user_ids=mpdata["liked_user_ids"]==null?["nothing"]:mpdata["liked_user_ids"];
+            islike=like_user_ids.contains(cUser.uid);
+            }
+            return blogsmp[index]==null?
+            CircleProgressBox():
+            BlogTile(
+              uid:mpdata['uid'],
+              authorname: mpdata["authorName"],
+              imgUrl:mpdata["imgUrl"],
+              title:mpdata["title"],
+              description: mpdata["desc"],
+              time: mpdata["time"],
+              documentId: mpdata["documentId"],
+              issaved: (cUser.savedBlogs).contains(mpdata["documentId"]),
+              likecount: 0,
+              isliked: islike,
+            );
+
+
           }
-          return blogsmp[index]==null?
-          CircleProgressBox():
-          BlogTile(
-            uid:mpdata['uid'],
-            authorname: mpdata["authorName"],
-            imgUrl:mpdata["imgUrl"],
-            title:mpdata["title"],
-            description: mpdata["desc"],
-            time: mpdata["time"],
-            documentId: mpdata["documentId"],
-            issaved: (cUser.savedBlogs).contains(mpdata["documentId"]),
-            likecount: 0,
-            isliked: islike,
-          );
-
-
-        }
+      ),
     );}
     else{
       return ListView.builder(

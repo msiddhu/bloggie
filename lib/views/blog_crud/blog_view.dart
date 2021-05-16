@@ -42,18 +42,19 @@ class _detailblogState extends State<detailblog> {
   }
   @override
   Widget build(BuildContext context) {
-
+    Color apptextcolor=Theme.of(context).appBarTheme.textTheme.headline6.color;
+    Color apptitlecolor=Theme.of(context).appBarTheme.textTheme.headline1.color;
     return Scaffold(
       appBar: AppBar(
         title:
         Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
           Text(
             "Detailed ",
-            style: TextStyle(fontSize: 20, color: Colors.yellow[900]),
+            style: TextStyle(fontSize: 20, color: apptitlecolor),
           ),
           Text(
             "View",
-            style: TextStyle(fontSize: 20, color: Colors.white),
+            style: TextStyle(fontSize: 20, color: apptextcolor),
           ),
         ]
         ),
@@ -118,6 +119,7 @@ class WriteComment extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
+              style:TextStyle(color:Theme.of(context).textTheme.headline1.color),
               textCapitalization: TextCapitalization.sentences,
            //   maxLength: 250,
               controller: txt,
@@ -239,6 +241,8 @@ class _BlogViewTileState extends State<BlogViewTile> {
 
   @override
   Widget build(BuildContext context) {
+    Color textcolor=Theme.of(context).textTheme.headline6.color;
+    Color titlecolor=Theme.of(context).textTheme.headline1.color;
     like=(widget.likecount==1)?" like":" likes";
     return Container(
      //  decoration:BoxDecoration(
@@ -255,7 +259,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
             //Text(widget.title ?? "Title",
             Text(widget.title,
                 style: TextStyle(
-                  color: Colors.yellow[800],
+                  color: titlecolor,
                   fontSize: 25,
                 )),
             Container(
@@ -263,7 +267,9 @@ class _BlogViewTileState extends State<BlogViewTile> {
               Row(
                   children:[
                     SizedBox(width: 20,),
-                    RaisedButton(onPressed: () async {
+                    RaisedButton(
+
+                        onPressed: () async {
                      bool refresh=await Navigator.push(context,
                           MaterialPageRoute(builder: (context) => EditBlog(blog_id:widget.documentId)));
                      if(refresh){
@@ -279,7 +285,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
                         ),
                         elevation: 5.0,
 
-                        child:Text("Edit")),
+                        child:Text("Edit",style:TextStyle(color:textcolor))),
                     new Spacer(),
                     RaisedButton(
                         shape: RoundedRectangleBorder(
@@ -292,7 +298,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
                           CrudMethods.deleteData(widget.documentId);
                           Navigator.pop(context);
 
-                        },child:Text("Delete",style: TextStyle(color: Colors.white),)),
+                        },child:Text("Delete",style: TextStyle(color: textcolor),)),
                     SizedBox(width: 20,),
                   ]
               ):
@@ -360,7 +366,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
 
                   child:Text(widget.description,
                       style: TextStyle(
-                        color: Colors.grey[900],
+                        color: textcolor,
                         fontSize: 17,
                       ),
                       textAlign: TextAlign.justify,
@@ -375,7 +381,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
             widget.likecount>0?Container(
                 alignment: Alignment.topLeft,
                 padding: EdgeInsets.fromLTRB(25,0, 0,0),
-                child: Text(widget.likecount.toString()+like)):Container(),
+                child: Text(widget.likecount.toString()+like,style:TextStyle(color:textcolor))):Container(),
 
             Container(
               child:widget.authorname==cUser.displayName?SizedBox(height:5):
@@ -383,12 +389,11 @@ class _BlogViewTileState extends State<BlogViewTile> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   RaisedButton.icon(
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(25.0),
                     ),
 
-                    // highlightColor:Colors.pink,
-                    color: widget.isliked ? Colors.red[50]:Colors.grey[50],
                     onPressed: () {
                       if(widget.isliked){
                         removelike(widget.documentId);
@@ -397,7 +402,6 @@ class _BlogViewTileState extends State<BlogViewTile> {
                         widget.likecount+=1;
                         addlike(widget.documentId);
                       }
-                      //  widget.isliked?removelike(widget.documentId):addlike(widget.documentId);
                       setState(() {
                         widget.likecount;
                         widget.isliked = ! widget.isliked;});
@@ -407,17 +411,18 @@ class _BlogViewTileState extends State<BlogViewTile> {
                     icon: Icon(Icons.favorite,
                       color:  widget.isliked ? Colors.red:Colors.grey,
                     ),
-                    label: Text('Like'),
+                    label: Text('Like',style: TextStyle(color:textcolor)),
                     splashColor: Colors.red,
                   ),
                   Divider(),
 
                   RaisedButton.icon(
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(25.0),
                     ),
 
-                    color: widget.issaved ?Colors.lime[50]: Colors.grey[50],
+                    //color: widget.issaved ?Colors.lime[50]: Colors.grey[50],
                     onPressed: () async {
                       print(cUser.savedBlogs);
                       await widget.issaved ? unsaveblog(widget.documentId):saveblog(widget.documentId);
@@ -425,7 +430,7 @@ class _BlogViewTileState extends State<BlogViewTile> {
                     },
 
                     icon: widget.issaved?Icon(Icons.bookmark,color: Colors.lime,):Icon(Icons.bookmark_border,),
-                    label: widget.issaved?Text('Saved'):Text('Save'),
+                    label: widget.issaved?Text('Saved',style: TextStyle(color:textcolor),):Text('Save',style: TextStyle(color:textcolor)),
                     splashColor: Colors.lime,
                   ),
                 ],

@@ -42,24 +42,25 @@ class _CreateBlogState extends State<CreateBlog> {
 
   @override
   Widget build(BuildContext context) {
+    Color textcolor=Theme.of(context).textTheme.headline6.color;
+    Color titlecolor=Theme.of(context).textTheme.headline1.color;
     return Scaffold(
       appBar: AppBar(
         title:
         Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
           Text(
             "Write ",
-            style: TextStyle(fontSize: 20, color: Colors.yellow[900]),
+            style: TextStyle(fontSize: 20, color: titlecolor),
           ),
           Text(
             "blog",
-            style: TextStyle(fontSize: 20, color: Colors.white),
+            style: TextStyle(fontSize: 20, color: textcolor),
           ),
         ]),
         actions: <Widget>[
           Container(
             padding: EdgeInsets.all(10),
             child: FloatingActionButton.extended(
-              backgroundColor: Colors.yellow[800],
               splashColor: Colors.yellow[800],
               focusColor: Colors.red,
               onPressed: () {

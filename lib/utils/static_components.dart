@@ -32,9 +32,6 @@ class cUser{
     };
     return mp;
   }
+
 }
 
-class cColors{
-  static Color appbarcolor=Colors.teal;
-  static bool darkmode=false;
-}

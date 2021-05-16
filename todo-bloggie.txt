@@ -1,29 +1,24 @@
 Awesome font integration
 
-dispose error
+edit name and photo
 
 1. Extendible blogtile with minmum height and max put 2000 letter limit to desc
 
-3 leave feed back
-About
+3   About
+
+Navigator.pop(context);
 
 3 unified colors,date
 
-
-4 Settings
- --dark mode
- -- delete account
-
-5 routing
-
 6 animations(transitions)
-url_launcher for linking the GitHub 
 
+im_app_review
 7 Searchbar
 
 8 username password
 
 9 anonymous user
 
+--in-app review
 10 website ios
  Share feature

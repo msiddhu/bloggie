@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bloggie/services/comments.dart';
 import 'package:bloggie/utils/static_components.dart';
+import 'package:bloggie/utils/color_components.dart';
 
 class CommentsView extends StatefulWidget {
 
@@ -39,7 +40,7 @@ class _CommentsViewState extends State<CommentsView> {
           else{
             return Column(
               children: [
-                Text("Number of comments: "+snapshot.data.docs.length.toString()),
+                Text("Number of comments: "+snapshot.data.docs.length.toString(),style:TextStyle(color:Theme.of(context).textTheme.headline1.color)),
                 ListView.builder(
                   physics: ClampingScrollPhysics(),
                   shrinkWrap: true,
@@ -104,6 +105,8 @@ class _commentTileState extends State<commentTile> {
     double cheight=widget.comment.length>120?150:100;
     print(widget.comment.length);
     print(cheight);
+    Color titlecolor=Theme.of(context).textTheme.headline1.color;
+    Color textcolor=Theme.of(context).textTheme.headline6.color;
     return Container(
 
       child: Column(
@@ -119,9 +122,9 @@ class _commentTileState extends State<commentTile> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
               // color: Colors.red,
-              child: Text(widget.datetime.toDate().toString().substring(0,16),
+              child: Text(widget.datetime.toDate().toString().substring(0,10),
                   style: TextStyle(
-                    color: Colors.black,
+                    color: textcolor,
                     fontSize: 12,
                   )),
             ),
@@ -134,7 +137,7 @@ class _commentTileState extends State<commentTile> {
             children: [
               SizedBox(width:20,),
               Flexible(
-                child:Text(widget.comment,
+                child:Text(widget.comment,style: TextStyle(color:textcolor),
                     softWrap: true, textAlign: TextAlign.justify),
               ),
               SizedBox(width:20),
@@ -177,7 +180,7 @@ class _commentTileState extends State<commentTile> {
                 child: Text(widget.authorname,
                     style: TextStyle(
                     decoration: TextDecoration.underline,
-                      color: Colors.blue[600],
+                      color: cColors.authorname,
                       fontSize: 12,
                     )
                 )
