@@ -1,24 +1,11 @@
-Awesome font integration
-
-edit name and photo
-
-1. Extendible blogtile with minmum height and max put 2000 letter limit to desc
-
-3   About
-
-Navigator.pop(context);
-
-3 unified date
-
-6 animations(transitions)
-
-im_app_review
-7 Searchbar
-
-8 username password
-
-9 anonymous user
-
---in-app review
-10 website ios
- Share feature
+1.Awesome font integration
+2.Edit name and photo
+3.Extendible blogtile with minmum height and max put 2000 letter limit to desc
+4.Unified date
+5.Animations(transitions)
+6.Searchbar
+7.Username password auth 
+8.im_app_review(package)
+9.Share feature
+10. website ios
+ 
