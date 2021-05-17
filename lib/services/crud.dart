@@ -56,14 +56,16 @@ class CrudMethods {
         snapshot.reference.delete();
       }}
       );
-
     cUser.blogCollection.doc(documentId).delete();
     DocumentSnapshot ds=await cUser.userRef.get();
     var v=List.from((ds.data()as Map)['blogs']);
     v.remove(documentId);
     await cUser.userRef.update({"blogs":v});
     print('deleted '+documentId.toString()+'succesfully');
+    cUser.blogs.remove(documentId);
+
     return true;
+
   }
 
 }

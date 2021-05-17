@@ -7,9 +7,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bloggie/utils/color_components.dart';
 import 'package:bloggie/utils/utils.dart';
+import 'package:bloggie/main.dart';
+import 'package:bloggie/config.dart';
 
-import '../config.dart';
-import '../main.dart';
 
 
 class HomePage extends StatefulWidget {

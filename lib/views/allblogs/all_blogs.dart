@@ -23,6 +23,7 @@ class _AllBlogsState extends State<AllBlogs> with AutomaticKeepAliveClientMixin{
   void initState() {
     print(widget.bloglist);
     blogslist=widget.bloglist;
+    print(blogslist);
     fillBlogData(blogslist);
     super.initState();
   }

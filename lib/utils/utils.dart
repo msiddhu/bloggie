@@ -35,12 +35,15 @@ return userblogs;
 }
 
 
-Future<int> getlikescountofuser(uid)async{
+Future<int> getlikescountofuser(uid) async {
   List userblogs=await getuserblogs(uid);
-  int count=0;
+print(userblogs);
+int count=0;
   for(int i=0;i<userblogs.length;i++) {
-    var ds = await cUser.blogCollection.doc(userblogs[i]).get();
-    Map mp=ds.data() as Map;
+    var ds = await FirebaseFirestore.instance.collection('blogs').doc(userblogs[i]).get();
+    print(ds.exists);
+    Map mp=(ds.data() as Map);
+    print(mp);
     count=count+mp['likesCount'];
   }
   return count;

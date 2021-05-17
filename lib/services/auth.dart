@@ -58,9 +58,8 @@ class AuthService {
 
   static init() async {
     if(cUser.ready){return true;}
-
     cUser.userRef = _db.collection('users').doc((await FirebaseAuth.instance.currentUser).uid);
-
+   // cUser.blogCollection=_db.collection('blogs');
     DocumentSnapshot ds= await cUser.userRef.get();
     if(ds.exists){
       print("exists");
@@ -74,7 +73,7 @@ class AuthService {
     cUser.savedBlogs=ds.get('savedBlogs');
     cUser.ready=true;
     }
-    //cUser.blogCollection=FirebaseFirestore.instance.collection('blogs');
+    cUser.blogCollection=FirebaseFirestore.instance.collection('blogs');
     //print(cUser.savedBlogs);
 
     print("user details initiated");
