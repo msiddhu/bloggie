@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bloggie/services/crud.dart';
 import 'package:bloggie/services/like.dart';
 import 'package:bloggie/services/save.dart';
@@ -38,7 +39,7 @@ class BlogTile extends StatefulWidget {
 
 class _BlogTileState extends State<BlogTile> {
   var iconsize = 25.0;
-  var boxheight = 10.0;
+  var boxheight = 7.0;
   String like;
   var descheight = 225.0;
   @override
@@ -75,11 +76,15 @@ class _BlogTileState extends State<BlogTile> {
                 height: boxheight,
               ),
 
-              Text(widget.title ?? "Title",
-                  style: TextStyle(
-                    color: titlecolor,
-                    fontSize: 20,
-                  )),
+              SizedBox(width:MediaQuery.of(context).size.width*(2.5/3),
+                child: AutoSizeText(widget.title ?? "Title",
+                    minFontSize: 15,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: titlecolor,
+                     fontSize: 20,
+                    )),
+              ),
 
               SizedBox(
                 height: boxheight / 10,
@@ -168,7 +173,7 @@ class _BlogTileState extends State<BlogTile> {
                   Container(
                     height: descheight,
                     decoration: BoxDecoration(
-                        color: Colors.black54.withOpacity(0.4),
+                        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.5),
                        // borderRadius: BorderRadius.circular(10)
                     ),
                   ),

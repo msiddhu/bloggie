@@ -2,6 +2,7 @@ import 'package:bloggie/utils/color_components.dart';
 import 'package:bloggie/views/profile/user_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class FollowingCard extends StatelessWidget {
   Map mpdata;
@@ -17,7 +18,7 @@ class FollowingCard extends StatelessWidget {
             MaterialPageRoute(builder: (context) => UserProfile(mpdata['uid'])));
       },
       child: Container(
-        padding: EdgeInsets.all(8),
+        margin: EdgeInsets.all(8),
         child: Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           color: cColors.followingtile,
@@ -25,7 +26,7 @@ class FollowingCard extends StatelessWidget {
           child:Row(
             children:[
               Container(
-                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.all(5),
                 child:Container(
                   child: ClipOval(
                       child: Image.network(mpdata['photoURL'])
@@ -39,19 +40,30 @@ class FollowingCard extends StatelessWidget {
                   ),
                 ),
 
-               // child: ClipOval(child: Image.network(mpdata['photoURL'])
-               // ),
               ),
               SizedBox(width:25),
-              Column(
-                children: [
-                  Text(mpdata['displayName'],style:TextStyle(fontWeight: FontWeight.bold,fontSize:18,color:textcolor ),),
-                  SizedBox(height: 10,),
-                  Text('Likes Count : '+mpdata['likescount'].toString(),style: TextStyle(color:textcolor),),
-                  SizedBox(height: 10,),
-                  Text('Number of Blogs : '+mpdata['blogscount'].toString(),style:TextStyle(color:textcolor)),
-                ],
-              )
+
+                 Column(
+                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+                        SizedBox(
+                          width:150,
+                          child: AutoSizeText(mpdata['displayName'],textAlign: TextAlign.justify,
+                              style:TextStyle(fontWeight: FontWeight.bold,color:textcolor ),
+                            maxLines: 2,
+
+                          ),
+                        ),
+
+                    SizedBox(height: 10,),
+                    Text('Likes Count : '+mpdata['likescount'].toString(),style: TextStyle(color:textcolor),),
+                    SizedBox(height: 5,),
+                    Text('Number of Blogs : '+mpdata['blogscount'].toString(),style:TextStyle(color:textcolor)),
+                  ],
+                ),
+
             ]
           ),
 

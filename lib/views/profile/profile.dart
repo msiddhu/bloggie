@@ -56,37 +56,44 @@ class _ProfileState extends State<Profile> {
                     ),
                     ),
                     SizedBox(width:18 ,),
-                    Column(
-                      children: [
-                        Text(displayName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color:textcolor),),
-                        SizedBox(height: 10,),
-                        Text(email,style: TextStyle(fontWeight: FontWeight.w400,color:textcolor),),
-                        SizedBox(height: 8,),
-                        Text("Registered :  "+registered_date.toDate().toString().substring(0,10),
-                          style: TextStyle(fontWeight: FontWeight.w400,color:textcolor)
-                          ,),
-                        cUser.uid!=uid?
-                        ElevatedButton(onPressed: ( ) {
-                          if(follow_text=="Follow"){
-                            followuser(uid).then((_){
-                              setState(() {
-                                follow_text="Unfollow";
-                              }); });}
-                          else{
-                            unfollowuser(uid).then((_){
-                              setState(() {
-                                follow_text="Follow";
+                    Container(
+                      width: MediaQuery.of(context).size.width/1.8,
+                      child: Column(
+                        children: [
+
+                          Text(displayName,textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color:textcolor)),
+                          SizedBox(height: 10,),
+                          Container(
+                              child: Text(email,textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.w400,color:textcolor),)),
+                          SizedBox(height: 8,),
+
+                            Text("Registered :  "+registered_date.toDate().toString().substring(0,10),
+                              style: TextStyle(fontWeight: FontWeight.w400,color:textcolor)
+                              ,),
+                          cUser.uid!=uid?
+                          ElevatedButton(onPressed: ( ) {
+                            if(follow_text=="Follow"){
+                              followuser(uid).then((_){
+                                setState(() {
+                                  follow_text="Unfollow";
+                                }); });}
+                            else{
+                              unfollowuser(uid).then((_){
+                                setState(() {
+                                  follow_text="Follow";
+                                }
+                                );
                               }
                               );
                             }
-                            );
-                          }
 
-                        },
-                          child: Text(follow_text,style: TextStyle(color:Theme.of(context).scaffoldBackgroundColor),),
-                        ):Container(),
-                        Stats(),
-                      ],
+                          },
+                            style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).textTheme.headline1.color)),
+                            child: Text(follow_text,style: TextStyle(color:Theme.of(context).scaffoldBackgroundColor),),
+                          ):Container(),
+                          Stats(),
+                        ],
+                      ),
                     )
 
                   ],

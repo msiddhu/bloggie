@@ -16,6 +16,7 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color textcolor=Theme.of(context).textTheme.headline6.color;
     return Drawer(
       child: new ListView(
         padding: new EdgeInsets.all(0.0),
@@ -27,12 +28,12 @@ class NavDrawer extends StatelessWidget {
             currentAccountPicture: CircleAvatar(child:Image.network(cUser.photoURL)),
               decoration: BoxDecoration(
                   //color: Colors.indigo,
-                  gradient: LinearGradient(colors: [Theme.of(context).scaffoldBackgroundColor,Colors.blue])),
+                  gradient: LinearGradient(colors: [Colors.blue,Theme.of(context).canvasColor])),
               //backgroundColor:Colors.amber,
 
           ),
           new ListTile(
-            title: new Text("Profile"),
+            title: new Text("Profile",style: TextStyle(color: textcolor),),
             trailing: new Icon(Icons.person,color:Colors.indigo),
             onTap: () => {
               Navigator.push(context,
@@ -44,7 +45,7 @@ class NavDrawer extends StatelessWidget {
           Divider(),
 
           ListTile(
-            title: new Text("Settings"),
+            title: new Text("Settings",style: TextStyle(color: textcolor)),
             trailing: new Icon(Icons.settings,color:Colors.purple),
             onTap: () => {
               Navigator.push(context,
@@ -53,7 +54,7 @@ class NavDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            title: new Text("Contact Us"),
+            title: new Text("Contact Us",style: TextStyle(color: textcolor)),
             trailing: new Icon(Icons.auto_stories,color:Colors.pink),
             onTap: () => {
               Navigator.push(context,
@@ -63,7 +64,7 @@ class NavDrawer extends StatelessWidget {
           Divider(),
           ListTile(
 
-            title: new Text("Sign Out "),
+            title: new Text("Sign Out ",style: TextStyle(color: textcolor)),
 
             trailing: new Icon(Icons.logout,color: Colors.red,),
             // trailing: new Icon(Icons.close),

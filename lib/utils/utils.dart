@@ -1,7 +1,10 @@
+import 'package:bloggie/utils/color_components.dart';
 import 'package:bloggie/utils/static_components.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bloggie/config.dart';
 
 Future<Map> getuserdetails(String uid) async{
 DocumentSnapshot ds=await FirebaseFirestore.instance.collection('users').doc(uid).get();
@@ -38,7 +41,7 @@ Future<int> getlikescountofuser(uid)async{
   for(int i=0;i<userblogs.length;i++) {
     var ds = await cUser.blogCollection.doc(userblogs[i]).get();
     Map mp=ds.data() as Map;
-    count=count+mp['likes_count'];
+    count=count+mp['likesCount'];
   }
   return count;
 }
@@ -52,8 +55,42 @@ Future<int> getblogscount(uid) async {
 String unifiedDate(date){
 
 }
-class Utils{
-
+ void setdarkmode(darkmode)  async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool('darkmode', darkmode);
 }
+
+
+
+
+
+
+class MyTheme with ChangeNotifier {
+
+  static bool _isdark=true;
+  MyTheme(){
+    if(prefs.containsKey('darkmode')){
+      _isdark=prefs.getBool('darkmode');
+    }
+    else{
+      prefs.setBool('darkmode',_isdark);
+    }
+  }
+
+
+  ThemeMode currenttheme(){
+   return  _isdark?ThemeMode.dark:ThemeMode.light;
+    print(_isdark);
+
+  }
+  void switchtheme(){
+    print('switchtheme called');
+    _isdark=!_isdark;
+    prefs.setBool('darkmode',_isdark);
+    print(_isdark);
+    notifyListeners();
+  }
+  }
+
 
 

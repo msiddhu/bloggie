@@ -1,9 +1,11 @@
 import 'package:bloggie/services/auth.dart';
+import 'package:bloggie/utils/utils.dart';
 import 'package:bloggie/views/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:bloggie/utils/static_components.dart';
+import 'package:bloggie/utils/color_components.dart';
 
+import '../main.dart';
 import '../views/open_page.dart';
 
 class connector extends StatefulWidget {
@@ -29,6 +31,8 @@ class _connectorState extends State<connector> {
         })
       }
       );
+
+
     }
 
 

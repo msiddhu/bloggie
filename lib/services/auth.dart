@@ -94,10 +94,10 @@ class AuthService {
 
 
   void signOut() {
-    _auth.signOut();
-    _googleSignIn.signOut();
     cUser.ready=false;
+    _googleSignIn.signOut();
+    _auth.signOut();
+
   }
 }
 
-final  AuthService authService = AuthService();

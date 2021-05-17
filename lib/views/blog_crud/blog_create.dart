@@ -12,7 +12,8 @@ class CreateBlog extends StatefulWidget {
 }
 
 class _CreateBlogState extends State<CreateBlog> {
-  String author, title, desc;
+  String author;
+  String title, desc;
   bool _isLoading = false;
   File _image;
   final picker = ImagePicker();
@@ -29,7 +30,7 @@ class _CreateBlogState extends State<CreateBlog> {
   Future getImage() async {
     final pickedFile = await picker.getImage(
         source: ImageSource.gallery,
-        imageQuality:60);
+        imageQuality:80);
 
     setState(() {
       if (pickedFile != null) {
@@ -99,20 +100,27 @@ class _CreateBlogState extends State<CreateBlog> {
                 ),
                 Container(
                     child: TextField(
+
+                      style: TextStyle(color:textcolor),
                       enableSuggestions: true,
                       textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
-                        focusColor: Colors.green,
+
+                        hoverColor: Colors.red,
+                        focusColor: titlecolor,
                         hintText: "Title of blog",
-                        fillColor: Colors.blue,
-                        border: OutlineInputBorder(),
+                        hintStyle: TextStyle(color: textcolor),
+                      //  fillColor: Colors.blue,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                         labelText: "Title",
                       ),
                       maxLength: 50,
                       minLines: 1,
                       maxLines: 2,
-                      onChanged: (val) {
-                        title = val;
+                      onChanged: (val){
+                        title=val;
                       },
                     )),
                 SizedBox(
@@ -120,12 +128,16 @@ class _CreateBlogState extends State<CreateBlog> {
                 ),
                 TextField(
                   //expands: true,
+                  style: TextStyle(color:textcolor),
                   textCapitalization: TextCapitalization.sentences,
                   decoration: InputDecoration(
+                      hintStyle: TextStyle(color: textcolor),
                       focusColor: Colors.red,
                       hintText: "Write the description",
                       fillColor: Colors.blue,
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       labelText: "Description",
                       labelStyle: TextStyle(
                           letterSpacing: 1, fontStyle: FontStyle.italic)),
@@ -134,9 +146,9 @@ class _CreateBlogState extends State<CreateBlog> {
                   maxLines:20,
                  minLines: 5,
                   maxLength: 600,
-                  onChanged: (val) {
-                    desc = val;
-                  },
+                  onChanged: (val){
+                    desc=val;
+                },
                 ),
                 SizedBox(
                   height: 10,
@@ -198,7 +210,7 @@ class _CreateBlogState extends State<CreateBlog> {
       "desc": desc,
       "liked_user_ids":[],
       "time":DateTime.now(),
-      "likes_count":0,
+      "likesCount":0,
       "commentIDs":[],
     };
     print(blogMap);
@@ -208,6 +220,7 @@ class _CreateBlogState extends State<CreateBlog> {
       Navigator.pop(context);
 
     });
+    return true;
   }
 
 

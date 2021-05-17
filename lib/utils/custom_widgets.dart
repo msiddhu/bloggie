@@ -102,7 +102,7 @@ class logo extends StatelessWidget {
         boxShadow: [BoxShadow(blurRadius: 10, color: Colors.white60, spreadRadius: 10)],
       ),
       child:CircleAvatar(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         radius: 64.0,
         child: Image.asset('assets/blogIcon.png'),
       ),

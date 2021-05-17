@@ -28,7 +28,7 @@ class _FollowingState extends State<Following> {
 
     return Container(
       child:ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
+       // physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: followingUid.length,
     itemBuilder:(context,index){

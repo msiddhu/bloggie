@@ -50,13 +50,20 @@ class CrudMethods {
     return true;
   }
 
-  static deleteData(documentId) async{
+  static Future<bool> deleteData(documentId) async{
+    cUser.blogCollection.doc(documentId).collection('comments').snapshots().forEach((element)  {
+      for (QueryDocumentSnapshot snapshot in element.docs) {
+        snapshot.reference.delete();
+      }}
+      );
+
     cUser.blogCollection.doc(documentId).delete();
     DocumentSnapshot ds=await cUser.userRef.get();
     var v=List.from((ds.data()as Map)['blogs']);
     v.remove(documentId);
-    cUser.userRef.update({"blogs":v});
+    await cUser.userRef.update({"blogs":v});
     print('deleted '+documentId.toString()+'succesfully');
+    return true;
   }
 
 }

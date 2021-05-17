@@ -6,7 +6,9 @@ import 'package:bloggie/views/nav_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bloggie/utils/color_components.dart';
+import 'package:bloggie/utils/utils.dart';
 
+import '../config.dart';
 import '../main.dart';
 
 
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                 time: mpdata["time"],
                 documentId: mpdata["documentId"],
                 issaved: (cUser.savedBlogs).contains(mpdata["documentId"]),
-                likecount: mpdata["likes_count"],
+                likecount: mpdata["likesCount"],
                 isliked: islike,
                 );
               },
@@ -87,31 +89,19 @@ class _HomePageState extends State<HomePage> {
       drawer: NavDrawer(),
       appBar: AppBar(
         actions: <Widget>[
-          Container(
-            padding:EdgeInsets.all(10),
-            //height: 20,
-            child: Column(
-              children: [
-                SizedBox(
-                  height:15,
-                  child: Switch(
-                      activeColor: Colors.blue[900],
-                      inactiveTrackColor: Colors.blue[200],
-                      inactiveThumbColor: Colors.grey,
-                      value: cColors.darkmode,
-
-                      onChanged: (bool value) {
-                        setState(() {
-                          print('Switch button: ' + value.toString());
-                          cColors.darkmode=value;
-                          main();
-                        });
-                      }
-                  ),
-                ),
-                SizedBox(height: 8,),
-                Text("Dark mode",style:TextStyle(fontSize: 10,color:Theme.of(context).textTheme.headline1.color)),
-              ],
+          InkWell(
+            onTap:(){currenttheme.switchtheme();},
+            child: Container(
+              padding:EdgeInsets.all(5),
+              //height: 20,
+              child: Column(
+                children: [
+                     Icon(Icons.wb_sunny_outlined,
+                        color: Theme.of(context).canvasColor,size: 25,),
+                  SizedBox(height: 5,),
+                  Text("Dark mode",style:TextStyle(fontWeight: FontWeight.bold,fontSize: 12,color:Theme.of(context).canvasColor)),
+                ],
+              ),
             ),
           )
         ],
@@ -185,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                        // isExpanded: true,
                         iconSize: 30.0,
                         style: TextStyle(color: Colors.black),
-                        items: ['time', 'likes_count'].map(
+                        items: ['time', 'likesCount'].map(
                               (val) {
                             return DropdownMenuItem<String>(
                               value: val,

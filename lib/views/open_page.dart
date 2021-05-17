@@ -21,18 +21,7 @@ class _OpenPageState extends State<OpenPage> {
     print('openpage raaa');
     return Container(
       decoration: BoxDecoration(
-        color: Colors.blue[200],
-        // gradient: LinearGradient(
-        //   begin: Alignment.center,
-        //   //stops: [0.1, 0.5, 0.7, 0.9],
-        //   colors: [
-        //     Colors.grey,
-        //     Colors.lightBlue,
-        //     Colors.white,
-        //
-        //   ],
-        //   tileMode: TileMode.mirror,
-        // ),
+          color: Theme.of(context).bottomAppBarColor,
 
       ),
       child: Scaffold(
@@ -51,14 +40,9 @@ class _OpenPageState extends State<OpenPage> {
               CircleProgress(),
               SizedBox(height: 60,),
               Text("Read and Write Blogs",textAlign: TextAlign.center,style: TextStyle(
-                color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.headline6.color,fontSize: 20,fontWeight: FontWeight.bold,
               ),
               ),
-
-
-
-              //loginButton,
-
             ],
           ),
         ),

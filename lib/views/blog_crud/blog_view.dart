@@ -82,7 +82,7 @@ class _detailblogState extends State<detailblog> {
                 issaved:(cUser.savedBlogs).contains(data["documentId"]) ,
                 time:data["time"],
                 documentId: data["documentId"],
-                likecount: data["likes_count"],
+                likecount: data["likesCount"],
                 isliked: like_user_ids.contains(cUser.uid),
               ),
               SizedBox(height: 10,),

@@ -8,7 +8,7 @@ edit name and photo
 
 Navigator.pop(context);
 
-3 unified colors,date
+3 unified date
 
 6 animations(transitions)
 

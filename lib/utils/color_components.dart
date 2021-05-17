@@ -56,7 +56,7 @@ class cColors{
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: Colors.cyan[200],
       ),
-
+canvasColor: Colors.blue[100],
     colorScheme: ColorScheme.light(
       primary: Colors.white,
       onPrimary: Colors.white,
@@ -101,6 +101,7 @@ class cColors{
     ),
     scaffoldBackgroundColor: scaffoldBglight,
     brightness: Brightness.light,
+    bottomAppBarColor: Colors.blue[300],
     primarySwatch: lightprimaryswatch,
       errorColor: profilelight
   );
@@ -121,7 +122,7 @@ class cColors{
       primaryVariant: Colors.white,
       secondary: Colors.blue,
     ),
-
+      canvasColor: Colors.black,
     appBarTheme: AppBarTheme(
 
         textTheme: TextTheme(
@@ -158,6 +159,7 @@ class cColors{
     ),
     scaffoldBackgroundColor: scaffoldBgdark,
     //brightness: Brightness.dark,
+      bottomAppBarColor: Colors.blue[800],
     primarySwatch: darkprimaryswatch,
     errorColor: profiledark
 

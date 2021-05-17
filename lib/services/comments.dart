@@ -4,7 +4,7 @@ class commentMethods {
 
   getAlldata(String documentId)async{
     print("this is get all data comments");
-    return cUser.blogCollection.doc(documentId).collection("comments").snapshots();
+    return cUser.blogCollection.doc(documentId).collection("comments").orderBy('time',descending: true).snapshots();
   }
 
   Future<bool> deleteComment(String documentId,String commentId) async {
@@ -29,7 +29,7 @@ class commentMethods {
       "authorname":cUser.displayName,
       "uid": cUser.uid,
       "comment": comment,
-      "datetime": date,
+      "time": date,
       "blogId":documentId,
       "commentId":commentdoc.id,
     };

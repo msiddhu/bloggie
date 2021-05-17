@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.blue[200],
+        color: Theme.of(context).bottomAppBarColor,
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -34,13 +34,13 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 25.0),
               blogTitle(),
               SizedBox(height: 100.0),
-              //loginButton(),
-              loginButtonv2(),
+
+              loginButton(),
 
               SizedBox(height: 60,),
 
               Text("Read and Write Blogs",textAlign: TextAlign.center,style: TextStyle(
-                color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.headline6.color,fontSize: 20,fontWeight: FontWeight.bold,
               ),
               ),
 
@@ -52,8 +52,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-class loginButtonv2 extends StatelessWidget {
-  const loginButtonv2({
+class loginButton extends StatelessWidget {
+  const loginButton({
     Key key,
   }) : super(key: key);
 

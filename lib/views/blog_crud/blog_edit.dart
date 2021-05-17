@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
-import 'package:bloggie/utils/static_components.dart';
 import 'package:bloggie/services/crud.dart';
-import 'package:bloggie/views/blog_crud/blog_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -203,31 +201,7 @@ class _EditBlogState extends State<EditBlog> {
               ),
             )
         ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   backgroundColor: Colors.green,
-      //   splashColor: Colors.yellow[800],
-      //   focusColor: Colors.red,
-      //   // shape: RoundedRectangleBorder(
-      //   //     borderRadius: BorderRadius.circular(14.0),
-      //   //     side: BorderSide(color: Colors.blue[900])),
-      //   onPressed: () {
-      //     if(desc_controller.text!=null&&title_controller.text!=null)
-      //     {
-      //       print("yes checked blog");
-      //       updateBlog();
-      //     }
-      //     else
-      //       {
-      //       showAlertDialog(context,"Fill all the fields \n(Title and Description)").showDialog();
-      //     }
-      //     // showAlertDialog(context).showDialog();
-      //
-      //   },
-      //   label: Text(
-      //     'Save',
-      //     style: TextStyle(fontSize: 18),
-      //   ),
-      // ),
+
 
     );
   }
@@ -262,12 +236,6 @@ print(map);
       _isLoading=!flag;
       print("is is done");
       //showSnackBar();
-
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => detailblog(documentId: widget.blog_id))
-      // );
       Navigator.pop(context,true);
     });
   }
