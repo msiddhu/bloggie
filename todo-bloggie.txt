@@ -1,5 +1,6 @@
 1.Awesome font integration
 2.Edit name and photo
+blogs categories
 3.Extendible blogtile with minmum height and max put 2000 letter limit to desc
 4.Unified date
 5.Animations(transitions)
