@@ -21,3 +21,9 @@ A blog app where you can write your posts with added functionalities of like, co
 7. Stats
 8. Delete account
 9. Dark mode
+
+
+## Discovered bugs 
+1. Edit blogs -Text sync with theme.
+2. Likes not working
+3. Count likes are not correct.
